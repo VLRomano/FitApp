@@ -1,12 +1,14 @@
 language: java
 jdk:
     -openjdk8
+    
+dist: trusty
 
 addons:
     sonarcloud:
         organization: vlromano
         token:
-            secure: 3b0edd0884f9faf418cc98660282fbc9eedebffc
+            secure: b985a8c217b9ff586608fc37fb15f993a393b2b6
         
 script: 
 - ant build
