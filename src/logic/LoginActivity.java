@@ -41,8 +41,9 @@ public class LoginActivity extends Application {
 			logger.log(Level.SEVERE, "Unable to load application\n"+e);
 		}
 	}
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
 }
+	
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
+//}

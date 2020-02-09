@@ -21,19 +21,19 @@ public class DatabaseConnection {
 	}
 	
 	public DatabaseConnection() {
-		try (
-			// open connection
-			Connection con = DriverManager.getConnection(URL,USR,PWD);
-			// verify connection
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("select version()")){
-			if(rs.next())
-				logger.log(Level.SEVERE, null, rs.getString(1));
-			this.connection = con;
-		} catch (SQLException e) {
-			logger.log(Level.SEVERE, null, "Failed to Connect\n"+e);
-		}
-	}
+	    try {
+	      // open connection
+	      Connection con = DriverManager.getConnection(URL,USR,PWD);
+	      // verify connection
+	      Statement st = con.createStatement();
+	      ResultSet rs = st.executeQuery("select version()");
+	      if(rs.next())
+	        logger.log(Level.SEVERE, null, rs.getString(1));
+	      this.connection = con;
+	    } catch (SQLException e) {
+	      logger.log(Level.SEVERE, null, "Failed to Connect\n"+e);
+	    }
+	  }
 
 	public void createDatabase(Connection con) {
 		if(con!=null) {
@@ -67,8 +67,8 @@ public class DatabaseConnection {
 		
 		return false;
 	}
-//	public static void main(String[] args) {
-//		DatabaseConnection con = new DatabaseConnection();		
-//		DatabaseConnection.createDatabase(con);
-//	}
+	public static void main(String[] args) {
+		DatabaseConnection con = new DatabaseConnection();		
+		con.createDatabase(con.getConnection());
+	}
 }
