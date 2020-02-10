@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.LoginActivity;
+import logic.LoginController;
 
 public class HomepageViewController {
 
@@ -69,10 +69,12 @@ public class HomepageViewController {
 		if(event.getSource().equals(signUpButton)) {
 			//TODO: LINK TO SIGNUP PAGE 
 		}
-		if(event.getSource()==logInButton) {
-			LoginActivity loginActivity = new LoginActivity();
+		if(event.getSource().equals(logInButton)) {
+			LoginController loginController = new LoginController(loginStage);
+//			LoginViewController log = new LoginViewController();
 			try {
-				loginActivity.start(loginStage);
+				loginController.launchView();
+//				log.start(loginStage);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

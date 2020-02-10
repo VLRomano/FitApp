@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import logic.fxmlcontrollers.HomepageViewController;
 
 public class HomePageActivity extends Application {
 	private double offsetX;
@@ -24,9 +23,9 @@ public class HomePageActivity extends Application {
         homepageViewScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
 		homePageStage.setScene(homepageViewScene);
-		homePageStage.initStyle(StageStyle.UNDECORATED);
+//		homePageStage.initStyle(StageStyle.UNDECORATED);
 		
-//		HomepageViewController homepageViewController = new HomepageViewController();
+
 			
 		root.setOnMousePressed(event -> {
 			offsetX = event.getSceneX();
@@ -47,7 +46,7 @@ public class HomePageActivity extends Application {
 		}
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+//	public static void main(String[] args) {
+//		launch(args);
+//	}
 }

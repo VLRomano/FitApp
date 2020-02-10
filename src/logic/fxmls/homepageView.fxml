@@ -15,8 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.fxmlcontrollers.HomepageViewController">
    <children>
       <BorderPane prefHeight="332.0" prefWidth="451.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -40,8 +39,8 @@
                         <HBox alignment="CENTER_RIGHT" prefHeight="67.0" prefWidth="523.0" />
                         <ButtonBar prefHeight="40.0" prefWidth="200.0">
                           <buttons>
-                              <Button fx:id="dignUpButton" mnemonicParsing="false" text="Sign up" />
-                            <Button fx:id="logInButton" mnemonicParsing="false" text="Log in" />
+                              <Button fx:id="signUpButton" mnemonicParsing="false" text="Sign up" />
+                            <Button fx:id="logInButton" mnemonicParsing="false" onAction="#handleMouseEvent" onMouseClicked="#handleMouseEvent" text="Log in" />
                           </buttons>
                            <HBox.margin>
                               <Insets right="10.0" />
