@@ -2,6 +2,8 @@ package logic.fxmlcontrollers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,6 +66,8 @@ public class HomepageViewController {
     
     Stage loginStage = new Stage();
     
+    private final Logger logger = Logger.getLogger(getClass().getName());
+    
     @FXML
 	private void handleMouseEvent(ActionEvent event) {
 		if(event.getSource().equals(signUpButton)) {
@@ -77,7 +81,7 @@ public class HomepageViewController {
 //				log.start(loginStage);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.log(Level.SEVERE, "Unable to load application\n"+e);
 			}
 		}
 		if(event.getSource().equals(findPersonalButton)) {
