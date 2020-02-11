@@ -4,11 +4,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import logic.factory.AbstractViewController;
+import logic.factory.ViewControllerFactory;
 
 public class LoginActivity extends Application {
 	private double offsetX;
@@ -18,32 +19,33 @@ public class LoginActivity extends Application {
 	@Override
 	public void start(Stage loginStage) throws Exception{
 		try {
-		Parent root = FXMLLoader.load(getClass().getResource("fxmls/login.fxml"));
-		Scene loginScene = new Scene(root);
-        loginScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+			ViewControllerFactory factory = ViewControllerFactory.getInstance();
+			AbstractViewController loginViewController = factory.createController(0);
+			Parent root = loginViewController.getView();
+			Scene loginScene = new Scene(root);
 
-		loginStage.setScene(loginScene);
-		loginStage.initStyle(StageStyle.UNDECORATED);
-		
-		root.setOnMousePressed(event -> {
-			offsetX = event.getSceneX();
-        	offsetY = event.getSceneY();			
-		});
-		
-		root.setOnMouseDragged(event -> {
-			loginStage.setX(event.getScreenX()-offsetX);
-        	loginStage.setY(event.getScreenY()-offsetY);
-		});
-		
-		new animatefx.animation.FadeIn(root).play();
-		loginStage.show();
+			loginStage.setScene(loginScene);
+			loginStage.initStyle(StageStyle.UNDECORATED);
+
+			root.setOnMousePressed(event -> {
+				offsetX = event.getSceneX();
+				offsetY = event.getSceneY();			
+			});
+
+			root.setOnMouseDragged(event -> {
+				loginStage.setX(event.getScreenX()-offsetX);
+				loginStage.setY(event.getScreenY()-offsetY);
+			});
+
+			new animatefx.animation.FadeIn(root).play();
+			loginStage.show();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Unable to load application\n"+e);
 		}
 	}
+
+
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
-	
-//	public static void main(String[] args) {
-//		launch(args);
-//	}
-//}

@@ -13,7 +13,7 @@ public class DatabaseConnection {
 	private Connection connection = null;
 	private static final String URL = "jdbc:postgresql://localhost:5432/fitappdb";
 	private static final String USR = "postgres";
-	private static final String PWD= "password";
+	private static final String PWD= "postgres";
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	public Connection getConnection(){
@@ -31,7 +31,7 @@ public class DatabaseConnection {
 	        logger.log(Level.SEVERE, null, rs.getString(1));
 	      this.connection = con;
 	    } catch (SQLException e) {
-	      logger.log(Level.SEVERE, null, "Failed to Connect\n"+e);
+	      logger.log(Level.SEVERE, "Failed to Connect\n"+e);
 	    }
 	  }
 

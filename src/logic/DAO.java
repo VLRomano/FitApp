@@ -1,11 +1,9 @@
 package logic;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +23,7 @@ public class DAO {
     private Connection connection = null;
 	private static final String URL = "jdbc:postgresql://localhost:5432/fitappdb";
 	private static final String USR = "postgres";
-	private static final String PWD= "password";
+	private static final String PWD= "postgres";
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	public Connection getConnection(){

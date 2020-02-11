@@ -48,7 +48,7 @@ public class Query {
 			/*insert into gym (gymname, position, trainerid, courseid) values ('g1','p1',1,3);*/
 
 	private static String selectItem =
-			"select id from users where username = 'admin' and password = 'admin';";	
+			"select id from users where name = 'admin' and password = 'admin';";	
 	
 	public static String getSelectItem() {
 		return selectItem;
