@@ -1,14 +1,8 @@
 package logic.viewcontroller;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -47,13 +41,8 @@ public class MainViewController{
 		if(event.getSource() == place) {
 
 			try {
-				//Parent p = MainView.getRoot();
-				//container = (BorderPane) MainViewController.getAllNodes(p).get(0);
-//				FXMLLoader loader = new FXMLLoader(getClass().getResource("/logic/fxmls/PlaceHolder.fxml"));
-//				Node replace = loader.load();
-//				container.setCenter(replace);
 				SubViewFactory factory = SubViewFactory.getInstance();
-				AbstractSubView subview = factory.createSubView(0);
+				AbstractSubView subview = factory.createSubView(1);
 				MainController ctrl = new MainController();
 				ctrl.replace(container, subview);
 			} catch (IOException e) {
@@ -61,17 +50,6 @@ public class MainViewController{
 			}
 		}
 	}	
-	public static List<Node> getAllNodes(Parent p){
-		ArrayList<Node> nodes = new ArrayList<>();
-		addAllDescendents(p,nodes);
-		return nodes;
-	}
-	private static void addAllDescendents(Parent p, ArrayList<Node> nodes) {
-		for (Node n : p.getChildrenUnmodifiable()) {
-			nodes.add(n);
-			if(n instanceof Parent)
-				addAllDescendents((Parent)n,nodes);
-		}
-	}
+
 
 }

@@ -70,7 +70,7 @@ public class TrainingFormViewController {
 			bean.setDescription(descriptionTArea.getText());
 			
 			//TODO launch confirmation screen
-			
+			System.out.println(bean.getDescription());
 		}
     }	
 }

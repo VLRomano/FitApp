@@ -1,8 +1,9 @@
 package logic.factory;
 
 public enum SubViewURL {
-	OFFERTRAININGFORM(0), 
-	BOOKINGFORM(1);
+	LOGIN(0),
+	OFFERTRAININGFORM(1), 
+	BOOKINGFORM(2);
 	
 	private final int type;
 	SubViewURL(int value){
@@ -13,6 +14,7 @@ public enum SubViewURL {
 		throw new IllegalArgumentException("No URL found");
 	}
 	private static String[] path = {
+			"/logic/fxmls/Login.fxml",
 			"/logic/fxmls/OfferTrainingForm.fxml",
 			"/logic/fxmls/BookingForm.fxml",
 	};

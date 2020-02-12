@@ -18,7 +18,6 @@ import logic.LoginBean;
 import logic.fxmlcontrollers.LoginController;
 
 public class LoginViewController {
-	private LoginController controller;
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	@FXML
 	private HBox topMenu;
@@ -69,11 +68,13 @@ public class LoginViewController {
 			String password = tfPwd.getText();
 			if(!username.equals("") && !password.equals("")) {
 				LoginController ctrl = new LoginController();
-				ctrl.checkAuthentication(new LoginBean(username, password));
+				if (ctrl.checkAuthentication(new LoginBean(username, password))) {
+					logger.log(Level.INFO,"User logged");
 				}
 			}
 		}
-	
+	}
+
 	@FXML
 	private void handleMouseEvent(MouseEvent event){
 		if(event.getSource()==btnClose) {
