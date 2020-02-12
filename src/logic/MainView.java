@@ -23,8 +23,6 @@ public class MainView extends Application implements AbstractView{
 	@Override
 	public void start(Stage mainStage) {		
 		try {
-			ViewControllerFactory factory = ViewControllerFactory.getInstance();
-			AbstractViewController viewController = factory.createController(1);
 			Parent root = viewController.getView();
 			Scene mainView = new Scene(root);
 			mainStage.setScene(mainView);

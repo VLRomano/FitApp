@@ -13,7 +13,7 @@ public class DAO {
 
     private DAO() {}
 
-    public synchronized static DAO getInstance(){
+    public static synchronized DAO getInstance(){
         if(DAO.instance == null){
             DAO.instance = new DAO();
         }

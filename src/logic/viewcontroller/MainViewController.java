@@ -70,8 +70,6 @@ public class MainViewController extends AbstractViewController{
 	    
 	    @FXML
 	    private Button place;
-//		Node replace = FXMLLoader(getClass().getResource("/logic/fxmls/PlaceHolder.fxml"));
-
 	    
 	    
 		@FXML
@@ -91,6 +89,4 @@ public class MainViewController extends AbstractViewController{
 //				}
 			}
 		}	
-
-
 }

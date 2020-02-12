@@ -18,23 +18,6 @@ public class LoginView extends Application implements AbstractView{
 	private double offsetX;
 	private double offsetY;
 	private Parent root;
-	public Parent getRoot() {
-		return root;
-	}
-	public void setRoot(Parent root) {
-		this.root = root;
-	}
-
-
-	private AbstractViewController loginViewController;
-	public AbstractViewController getLoginViewController() {
-		return loginViewController;
-	}
-	public void setLoginViewController(AbstractViewController loginViewController) {
-		this.loginViewController = loginViewController;
-	}
-
-
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	public LoginView() {
@@ -47,10 +30,6 @@ public class LoginView extends Application implements AbstractView{
 	@Override
 	public void start(Stage loginStage) throws Exception{
 		try {
-//			ViewControllerFactory factory = ViewControllerFactory.getInstance();
-//			AbstractViewController loginViewController = factory.createController(0);
-			
-			//this.root = loginViewController.getView();
 			Scene loginScene = new Scene(root);
 
 			loginStage.setScene(loginScene);
@@ -72,32 +51,22 @@ public class LoginView extends Application implements AbstractView{
 			logger.log(Level.SEVERE, "Unable to load application\n"+e);
 		}
 	}
-
-
-	public static void main(String[] args) {
-		launch(args);
-	}
-
-
+	
 	@Override
 	public void load() throws IOException {
 		// TODO Auto-generated method stub
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/logic/fxmls/Login.fxml"));
-		this.root = loader.load();
-		this.setLoginViewController(loader.getController());
+		setRoot(loader.load());
 	}
-
-
-	@Override
-	public Parent getView() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Parent getRoot() {
+		return root;
 	}
-
-
-	@Override
-	public void setView(Parent view) {
-		// TODO Auto-generated method stub
-		
+	public void setRoot(Parent root) {
+		this.root = root;
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
 	}
 }
