@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.viewcontroller.MainViewController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles.css"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.viewcontroller.MainViewController">
    <children>
       <BorderPane fx:id="container" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -52,12 +52,6 @@
                </padding>
              </HBox>
          </bottom>
-         <left>
-            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="linear-grad" BorderPane.alignment="CENTER" />
-         </left>
-         <right>
-            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="linear-grad" BorderPane.alignment="CENTER" />
-         </right>
       </BorderPane>
    </children>
 </AnchorPane>
