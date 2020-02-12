@@ -1,29 +1,42 @@
 package logic;
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import logic.factory.AbstractView;
-import logic.factory.AbstractViewController;
-import logic.factory.ViewControllerFactory;
 
-public class MainView extends Application implements AbstractView{
+public class MainView extends Application {
 	private double offsetX;
 	private double offsetY;
+	private Parent root;
+	public Parent getRoot() {
+		return this.root;
+	}
+	public void setRoot(Parent root) {
+		this.root = root;
+	}
 	private final Logger logger = Logger.getLogger(getClass().getName());
-//java.lang.ClassCastException: logic.fxmlcontrollers.LoginViewController cannot be cast to logic.fxmlcontrollers.LoginController
-
+	
+	public MainView() { // may be singleton
+		try {
+			load();
+		} catch (IOException e) {
+			logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
+		}
+	}
+	public void load() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/logic/fxmls/Container.fxml"));
+		 setRoot(loader.load());
+	}
 
 	@Override
-	public void start(Stage mainStage) {		
+	public void start(Stage mainStage) throws Exception{		
 		try {
-			Parent root = viewController.getView();
 			Scene mainView = new Scene(root);
 			mainStage.setScene(mainView);
 			mainStage.initStyle(StageStyle.UNDECORATED);
@@ -37,7 +50,7 @@ public class MainView extends Application implements AbstractView{
 				mainStage.setY(event.getScreenY()-offsetY);
 			});
 			mainStage.show();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.log(Level.SEVERE,"Unable to load application: "+e);
 		}
 
@@ -46,23 +59,4 @@ public class MainView extends Application implements AbstractView{
 	public static void main(String[] args) {
 		launch(args);
 	}
-
-	@Override
-	public void load() throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Parent getView() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setView(Parent view) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

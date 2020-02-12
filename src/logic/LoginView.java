@@ -10,14 +10,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import logic.factory.AbstractView;
-import logic.factory.AbstractViewController;
-import logic.factory.ViewControllerFactory;
 
-public class LoginView extends Application implements AbstractView{
+public class LoginView extends Application {
 	private double offsetX;
 	private double offsetY;
 	private Parent root;
+	public Parent getRoot() {
+		return root;
+	}
+	public void setRoot(Parent root) {
+		this.root = root;
+	}
+
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	public LoginView() {
@@ -27,6 +31,11 @@ public class LoginView extends Application implements AbstractView{
 			logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
 		}
 	}
+	public void load() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/logic/fxmls/Login.fxml"));
+		setRoot(loader.load());
+	}
+
 	@Override
 	public void start(Stage loginStage) throws Exception{
 		try {
@@ -51,21 +60,8 @@ public class LoginView extends Application implements AbstractView{
 			logger.log(Level.SEVERE, "Unable to load application\n"+e);
 		}
 	}
-	
-	@Override
-	public void load() throws IOException {
-		// TODO Auto-generated method stub
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/logic/fxmls/Login.fxml"));
-		setRoot(loader.load());
-	}
-	
-	public Parent getRoot() {
-		return root;
-	}
-	public void setRoot(Parent root) {
-		this.root = root;
-	}
-	
+
+
 	public static void main(String[] args) {
 		launch(args);
 	}
