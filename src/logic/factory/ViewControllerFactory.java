@@ -1,7 +1,7 @@
 package logic.factory;
 import java.io.IOException;
-import logic.viewcontroller.LoginActivityViewController;
-import logic.viewcontroller.MainActivityViewController;
+import logic.viewcontroller.LoginViewController;
+import logic.viewcontroller.MainViewController;
 
 public class ViewControllerFactory {
 	private static ViewControllerFactory instance = null;
@@ -17,9 +17,9 @@ public class ViewControllerFactory {
 	public AbstractViewController createController(int type) throws IOException{
 		switch(type) {
 		case 0:
-			return LoginActivityViewController.getInstance();
+			return new LoginViewController();
 		case 1:
-			return MainActivityViewController.getInstance();
+			return new MainViewController();
 		default:
 			throw new IOException("ViewControllerFactory exception");
 		}

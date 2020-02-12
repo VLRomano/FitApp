@@ -9,14 +9,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import logic.factory.AbstractView;
 import logic.factory.AbstractViewController;
 import logic.factory.ViewControllerFactory;
 
-public class MainActivity extends Application{
+public class MainView extends Application implements AbstractView{
 	private double offsetX;
 	private double offsetY;
 	private final Logger logger = Logger.getLogger(getClass().getName());
-//java.lang.ClassCastException: logic.fxmlcontrollers.LoginViewController cannot be cast to logic.fxmlcontrollers.LoginActivityController
+//java.lang.ClassCastException: logic.fxmlcontrollers.LoginViewController cannot be cast to logic.fxmlcontrollers.LoginController
 
 
 	@Override
@@ -46,6 +47,24 @@ public class MainActivity extends Application{
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	@Override
+	public void load() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Parent getView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setView(Parent view) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

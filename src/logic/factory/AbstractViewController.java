@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 
 public abstract class AbstractViewController {
-	public abstract void load() throws IOException;
+	//public abstract void load() throws IOException;
 	public static List<Node> getAllNodes(Parent p){
 		ArrayList<Node> nodes = new ArrayList<>();
 		addAllDescendents(p,nodes);
