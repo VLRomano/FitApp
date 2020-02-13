@@ -49,6 +49,7 @@ public class DAO {
 			pst.setString(1, username);
 			pst.setString(2, password);
 			try(ResultSet rs = pst.executeQuery()){
+				System.out.println(rs);
 				rs.next();
 				if(rs.getInt(1)>0) {
 					logger.log(Level.INFO,"user found");
@@ -57,8 +58,8 @@ public class DAO {
 					logger.log(Level.SEVERE, "Wrong Username or Password");
 				}
 			}
-		} catch (SQLException e) {
-			logger.log(Level.SEVERE, e.getMessage(),e);
+		} catch (SQLException connException) {
+			logger.log(Level.SEVERE, connException.getMessage(),connException);
 		}
 		return false;
 	}

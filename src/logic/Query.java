@@ -17,7 +17,15 @@ public class Query {
 			"    trainerID int not null," + 
 			"    foreign key (trainerID) references trainer(trainerID)," + 
 			"    info varchar not null," + 
-			"    unique (courseID,trainerID));"
+			"    unique (courseID,trainerID));"+
+			
+			" create table if not exists user("
+			+ " userID serial not null primary key,"
+			+ " username varchar not null,"
+			+ " password varchar  not null,"
+			+ " gymname varchar,"
+			+ " foreign key (gymname) references gym(gymname),"
+			+ " unique (userID, gymname));"
 			
 			+ "create table if not exists gym(" + 
 			"    gymID serial not null primary key," + 
