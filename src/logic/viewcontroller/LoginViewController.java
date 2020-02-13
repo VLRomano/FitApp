@@ -1,4 +1,5 @@
 package logic.viewcontroller;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import animatefx.animation.ZoomIn;
@@ -15,7 +16,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import logic.LoginBean;
+import logic.factory.AbstractSubView;
+import logic.factory.SubViewFactory;
 import logic.fxmlcontrollers.LoginController;
+import logic.fxmlcontrollers.MainController;
 
 public class LoginViewController {
 	private final Logger logger = Logger.getLogger(getClass().getName());
@@ -49,7 +53,7 @@ public class LoginViewController {
 	private AnchorPane anchRoot;
 
 	@FXML
-	private void handleButtonEvent(ActionEvent event) {
+	private void handleButtonEvent(ActionEvent event) throws IOException {
 		if(event.getSource().equals(btnNoAcc)) {
 			new ZoomOut(pnSignIn).play();
 			pnSignIn.toBack();
@@ -69,7 +73,10 @@ public class LoginViewController {
 			if(!username.equals("") && !password.equals("")) {
 				LoginController ctrl = new LoginController();
 				if (ctrl.checkAuthentication(new LoginBean(username, password))) {
-					logger.log(Level.INFO,"User logged");
+					/*logger.log(Level.INFO,"User logged");*/
+					SubViewFactory factory = SubViewFactory.getInstance();
+					AbstractSubView subview = factory.createSubView(1);
+					MainController.getInstance().replace(MainController.getContainer(), subview);
 				}
 			}
 		}

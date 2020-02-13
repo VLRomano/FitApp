@@ -4,6 +4,8 @@ public enum SubViewURL {
 	LOGIN(0),
 	OFFERTRAININGFORM(1), 
 	BOOKINGFORM(2);
+	/* MAX SUBVIEW DIM: 900 x 542
+	 * */
 	
 	private final int type;
 	SubViewURL(int value){

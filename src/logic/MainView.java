@@ -56,7 +56,7 @@ public class MainView extends Application {
 				mainStage.setX(event.getScreenX()-offsetX);
 				mainStage.setY(event.getScreenY()-offsetY);
 			});
-			MainController ctrl = new MainController();
+			MainController ctrl = MainController.getInstance();//new MainController();
 			SubViewFactory factory = SubViewFactory.getInstance();
 			AbstractSubView subview = factory.createSubView(0);
 			ctrl.replace((BorderPane)getAllNodes(root).get(0), subview);

@@ -48,25 +48,25 @@ public class DatabaseConnection {
 			newDbCon.createDatabase(newDbCon.getConnection());
 		}
 	}
-	public boolean checkLogIn(Connection con, String username, String password) {
-		if(con!=null) {
-			try (PreparedStatement pst = con.prepareStatement(Query.getSelectItem());
-					ResultSet rs = pst.executeQuery()){
-				rs.next();
-				if(rs.getInt(1)>0) {
-					logger.log(Level.INFO,"user found");
-					return true;
-				} else {
-					logger.log(Level.SEVERE, "Wrong Username or Password");
-				}
-				con.close();
-			} catch (SQLException e) {
-				logger.log(Level.SEVERE, e.getMessage(),e);
-			}
-		}
-		
-		return false;
-	}
+//	public boolean checkLogIn(Connection con, String username, String password) {
+//		if(con!=null) {
+//			try (PreparedStatement pst = con.prepareStatement(Query.getSelectItem());
+//					ResultSet rs = pst.executeQuery()){
+//				rs.next();
+//				if(rs.getInt(1)>0) {
+//					logger.log(Level.INFO,"user found");
+//					return true;
+//				} else {
+//					logger.log(Level.SEVERE, "Wrong Username or Password");
+//				}
+//				con.close();
+//			} catch (SQLException e) {
+//				logger.log(Level.SEVERE, e.getMessage(),e);
+//			}
+//		}
+//		
+//		return false;
+//	}
 	public static void main(String[] args) {
 		DatabaseConnection con = new DatabaseConnection();		
 		con.createDatabase(con.getConnection());

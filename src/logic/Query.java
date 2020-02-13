@@ -47,11 +47,11 @@ public class Query {
 			/* ALERT: insert like this gives error, as expected */ 
 			/*insert into gym (gymname, position, trainerid, courseid) values ('g1','p1',1,3);*/
 
-	private static String selectItem =
-			"select id from users where name = 'admin' and password = 'admin';";	
+	private static String login =
+			"select id from users where username = ? and password = ?;";	
 	
-	public static String getSelectItem() {
-		return selectItem;
+	public static String getLogin() {
+		return login;
 	}
 	
 	public static String getDropTable() {
