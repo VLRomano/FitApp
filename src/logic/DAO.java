@@ -30,7 +30,6 @@ public class DAO {
 	private static final String PWD= "password";
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	public Connection getConnection(){
-	public Connection getConnection(){
 		return this.connection;
 	}
 
@@ -87,22 +86,44 @@ public class DAO {
 	
 	public Gym getGymEntity(String username) {
 		
+		List<String> courses = new ArrayList<String>();
+		courses.add("One");
+		courses.add("Two");
+		courses.add("Three");
+		courses.add("Four");
+		
+		List<String> trainers = new ArrayList<String>();
+		trainers.add("TOne");
+		trainers.add("TTwo");
+		trainers.add("TThree");
+		trainers.add("TFour");
+		
+		int id = 1;
+		String name = "palestra";
+		String position = "via generica";
+		
 		Gym gym = new Gym();
 		
-		String query = "select * from gym where username = ?";
-		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
-			PreparedStatement pst = con.prepareStatement(query)){
-			pst.setString(1, username);
-			try(ResultSet rs = pst.executeQuery()){
-				if(rs.next()) {
-					logger.log(Level.INFO,"gym found");
-					gym.setName(rs.getString("gymname"));
-					//TODO finish initializing the gym entity
-				}
-			}		
-		} catch (SQLException e1) {
-			logger.log(Level.SEVERE, e1.getMessage(),e1);
-		}
+		gym.setCourses(courses);
+		gym.setId(id);
+		gym.setName(name);
+		gym.setPosition(position);
+		gym.setTrainers(trainers);
+		
+//		String query = "select * from gym where username = ?";
+//		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
+//			PreparedStatement pst = con.prepareStatement(query)){
+//			pst.setString(1, username);
+//			try(ResultSet rs = pst.executeQuery()){
+//				if(rs.next()) {
+//					logger.log(Level.INFO,"gym found");
+//					gym.setName(rs.getString("gymname"));
+//					//TODO finish initializing the gym entity
+//				}
+//			}		
+//		} catch (SQLException e1) {
+//			logger.log(Level.SEVERE, e1.getMessage(),e1);
+//		}
 		
 		
 //		gym.setId(id);

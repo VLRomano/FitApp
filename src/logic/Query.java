@@ -17,15 +17,15 @@ public class Query {
 			"    trainerID int not null," + 
 			"    foreign key (trainerID) references trainer(trainerID)," + 
 			"    info varchar not null," + 
-			"    unique (courseID,trainerID));"+
+			"    unique (courseID,trainerID));"
 			
-			" create table if not exists user("
+			+ "create table if not exists users("
 			+ " userID serial not null primary key,"
 			+ " username varchar not null,"
-			+ " password varchar  not null,"
-			+ " gymname varchar,"
-			+ " foreign key (gymname) references gym(gymname),"
-			+ " unique (userID, gymname));"
+			+ " password varchar not null,"
+			+ " gymName varchar,"
+			+ " foreign key (gymName) references gym(gymName),"
+			+ " unique (userID, gymName));"
 			
 			+ "create table if not exists gym(" + 
 			"    gymID serial not null primary key," + 
@@ -33,6 +33,7 @@ public class Query {
 			"    position varchar not null," + 
 			"    trainerID int not null," + 
 			"    courseID int not null," + 
+			"	 users varchar not null" +
 			"    foreign key (courseID, trainerID) references course(courseID,trainerID)," + 
 			"    unique (gymID,courseID, trainerID));";
 	

@@ -1,4 +1,5 @@
 package logic.viewcontroller;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -10,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import logic.factory.AbstractSubView;
+import logic.factory.SubViewFactory;
 import logic.fxmlcontrollers.MainController;
 
 public class MainViewController implements Initializable{
@@ -40,16 +43,15 @@ public class MainViewController implements Initializable{
 		}
 		if(event.getSource() == place) {
 			logger.log(Level.INFO, "placeholder");
-			/*try {
+			try {
 				SubViewFactory factory = SubViewFactory.getInstance();
 				AbstractSubView subview = factory.createSubView(1);
-				//MainController ctrl = new MainController();
-				MainController.getInstance().replace(MainController.getContainer(), subview);
+//				MainController.getInstance().replace(MainController.getContainer(), subview);
 				MainController ctrl = MainController.getInstance();
 				ctrl.replace(MainController.getContainer(), subview);
 			} catch (IOException e) {
 				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
-			}*/
+			}
 		}
 	}
 

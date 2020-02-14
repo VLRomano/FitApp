@@ -9,16 +9,11 @@ public class TrainingFormBean {
 	private String trainingType;
 	private String trainingName;
 	private String trainerName;
-	private String hour;
-	private String minute;
+	private Integer startHour;
+	private Integer startMinute;
+	private Integer endHour;
+	private Integer endMinute;
 	private LocalDate date;
-	
-	public String getMinute() {
-		return minute;
-	}
-	public void setMinute(String minute) {
-		this.minute = minute;
-	}
 
 	private String description;
 	
@@ -52,12 +47,7 @@ public class TrainingFormBean {
 	public void setTrainerName(String trainerName) {
 		this.trainerName = trainerName;
 	}
-	public String getHour() {
-		return hour;
-	}
-	public void setHour(String hour) {
-		this.hour = hour;
-	}
+	
 	public LocalDate getDate() {
 		return date;
 	}
@@ -69,5 +59,29 @@ public class TrainingFormBean {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Integer getStartHour() {
+		return startHour;
+	}
+	public void setStartHour(Integer startHour) {
+		this.startHour = startHour;
+	}
+	public Integer getStartMinute() {
+		return startMinute;
+	}
+	public void setStartMinute(Integer startMinute) {
+		this.startMinute = startMinute;
+	}
+	public Integer getEndHour() {
+		return endHour;
+	}
+	public void setEndHour(Integer endHour) {
+		this.endHour = endHour;
+	}
+	public Integer getEndMinute() {
+		return endMinute;
+	}
+	public void setEndMinute(Integer endMinute) {
+		this.endMinute = endMinute;
 	}
 }

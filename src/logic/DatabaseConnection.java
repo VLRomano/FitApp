@@ -13,7 +13,7 @@ public class DatabaseConnection {
 	private Connection connection = null;
 	private static final String URL = "jdbc:postgresql://localhost:5432/fitappdb";
 	private static final String USR = "postgres";
-	private static final String PWD= "postgres";
+	private static final String PWD= "password";
 	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	public Connection getConnection(){

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -20,41 +21,47 @@ import logic.controller.OfferTrainingController;
 
 public class TrainingFormViewController implements Initializable{
 
-    @FXML
-    private Label homeLabel;
+	 @FXML
+	    private Label homeLabel;
 
-    @FXML
-    private RadioButton singleRButton;
+	    @FXML
+	    private RadioButton singleRButton;
 
-    @FXML
-    private RadioButton groupRButton;
+	    @FXML
+	    private ToggleGroup session;
 
-    @FXML
-    private ChoiceBox<String> trainingTypeCBox;
+	    @FXML
+	    private RadioButton groupRButton;
 
-    @FXML
-    private TextField trainingNameTField;
+	    @FXML
+	    private ChoiceBox<String> trainingTypeCBox;
 
-    @FXML
-    private ChoiceBox<String> trainerCBox;
+	    @FXML
+	    private TextField trainingNameTField;
 
-    @FXML
-    private TextField hourTField;
+	    @FXML
+	    private ChoiceBox<String> trainerCBox;
 
-    @FXML
-    private TextField minuteTField;
+	    @FXML
+	    private ComboBox<Integer> startHourCBox;
 
-    @FXML
-    private DatePicker datePicker;
+	    @FXML
+	    private ComboBox<Integer> startMinuteCBox;
+	    
+	    @FXML
+	    private ComboBox<Integer> endHourCBox;
 
-    @FXML
-    private TextArea descriptionTArea;
+	    @FXML
+	    private ComboBox<Integer> endMinuteCBox;
 
-    @FXML
-    private Button okButton;
-    
-    @FXML
-    private ToggleGroup session;
+	    @FXML
+	    private DatePicker datePicker;
+
+	    @FXML
+	    private TextArea descriptionTArea;
+
+	    @FXML
+	    private Button okButton;
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -66,6 +73,20 @@ public class TrainingFormViewController implements Initializable{
     	ObservableList<String> trainerList = ctrl.getTrainerList();
     	trainerCBox.setItems(trainerList);
     	trainerCBox.setValue(trainerList.get(0));
+    	
+    	startHourCBox.getItems().addAll(hourGenerator());
+    	startHourCBox.setPromptText("HH");
+    	
+    	startMinuteCBox.getItems().addAll(minuteList);
+    	startMinuteCBox.setPromptText("MM");
+    	
+    	endHourCBox.getItems().addAll(hourGenerator());
+    	endHourCBox.setPromptText("HH");
+    	
+    	endMinuteCBox.getItems().addAll(minuteList);
+    	endMinuteCBox.setPromptText("MM");
+    	
+    	
 	}
     	
     @FXML
@@ -82,15 +103,27 @@ public class TrainingFormViewController implements Initializable{
 			bean.setTrainingType(trainingTypeCBox.getValue());
 			bean.setTrainingName(trainingNameTField.getText());
 			bean.setTrainerName(trainerCBox.getValue());
-			bean.setHour(hourTField.getText());
-			bean.setMinute(minuteTField.getText());
+			bean.setStartHour(startHourCBox.getValue());
+			bean.setStartMinute(startMinuteCBox.getValue());
+			bean.setEndHour(endHourCBox.getValue());
+			bean.setEndMinute(endMinuteCBox.getValue());
 			bean.setDate(datePicker.getValue());
 			bean.setDescription(descriptionTArea.getText());
 			
 			//TODO launch confirmation screen
+			
+			
 			System.out.println(bean.getDescription());
 		}
     }
+    
+    private Integer[] minuteList = {00, 15, 30, 45};
 
-
+    private Integer[] hourGenerator() {
+    	Integer[] list = new Integer[24];
+    	
+    	for (int i = 0; i < 24; i++)
+    	    list[i] = i;
+    	return list;
+    	}
 }

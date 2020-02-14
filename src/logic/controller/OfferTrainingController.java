@@ -25,7 +25,7 @@ public class OfferTrainingController {
 	
 	
 	public Gym getGymEntity(/*user name dynamically gotten*/) {
-		Gym gym = dao.getGymEntity(username);
+		Gym gym = dao.getGymEntity(username); //this method is a dummy needs to be implemented
 		return gym;
 	}
 }

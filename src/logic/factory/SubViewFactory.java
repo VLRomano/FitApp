@@ -3,6 +3,7 @@ package logic.factory;
 import java.io.IOException;
 
 import logic.LoginView;
+import logic.TrainingConfirmationSubView;
 import logic.TrainingFormSubView;
 
 public class SubViewFactory {
@@ -20,6 +21,8 @@ public class SubViewFactory {
 			return new LoginView(type);
 		case 1:
 			return new TrainingFormSubView(type);
+		case 3:
+			return new TrainingConfirmationSubView(type);
 		default:
 			throw new IOException("SubViewFactory exception");
 		}
