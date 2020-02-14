@@ -1,6 +1,11 @@
 package logic.viewcontroller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -11,8 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import logic.TrainingFormBean;
+import logic.controller.OfferTrainingController;
 
-public class TrainingFormViewController {
+public class TrainingFormViewController implements Initializable{
 
     @FXML
     private Label homeLabel;
@@ -50,6 +56,18 @@ public class TrainingFormViewController {
     @FXML
     private ToggleGroup session;
     
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+		OfferTrainingController ctrl = new OfferTrainingController();
+		ObservableList<String> typeList = ctrl.getTrainingList();
+    	trainingTypeCBox.setItems(typeList);
+    	trainingTypeCBox.setValue(typeList.get(0));
+    	
+    	ObservableList<String> trainerList = ctrl.getTrainerList();
+    	trainerCBox.setItems(trainerList);
+    	trainerCBox.setValue(trainerList.get(0));
+	}
+    	
     @FXML
 	private void onMouseClickedEvent(MouseEvent event){
     	if(event.getSource().equals(homeLabel)) {
@@ -72,5 +90,7 @@ public class TrainingFormViewController {
 			//TODO launch confirmation screen
 			System.out.println(bean.getDescription());
 		}
-    }	
+    }
+
+
 }
