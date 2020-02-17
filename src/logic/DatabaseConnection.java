@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import lib.DBTablePrinter;
+//import lib.DBTablePrinter;
 
 public class DatabaseConnection {
 	private static final String URL = "jdbc:postgresql://localhost:5432/fitappdb";
@@ -15,14 +15,7 @@ public class DatabaseConnection {
 	private static final String PWD= "postgres";
 	private final Logger logger = Logger.getLogger(getClass().getName());
 
-//	public void createDatabase() {
-//		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
-//				PreparedStatement pst = con.prepareStatement(Query.getCreateTable())){
-//			pst.executeUpdate();
-//		} catch (SQLException createEx) {
-//			logger.log(Level.SEVERE, createEx.getMessage(),createEx);
-//		}
-//	}
+
 
 	public void fillTable() {
 		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
@@ -33,19 +26,19 @@ public class DatabaseConnection {
 		}
 	}
 	
-	public void printAllTables() {
-		try( Connection con = DriverManager.getConnection(URL,USR,PWD)){
-			DBTablePrinter.printTable(con, "trainer");
-			DBTablePrinter.printTable(con, "course");
-			DBTablePrinter.printTable(con, "users");
-			DBTablePrinter.printTable(con, "gym");
-		} catch (SQLException printEx) {
-			logger.log(Level.SEVERE, printEx.getMessage(), printEx);
-		}
-	}
-	/*public static void main(String[] args) {
-		DatabaseConnection con = new DatabaseConnection();		
-		con.createDatabase();
-		con.printAllTables();
-	}*/
+//	public void printAllTables() {
+//		try( Connection con = DriverManager.getConnection(URL,USR,PWD)){
+//			DBTablePrinter.printTable(con, "trainer");
+//			DBTablePrinter.printTable(con, "course");
+//			DBTablePrinter.printTable(con, "users");
+//			DBTablePrinter.printTable(con, "gym");
+//		} catch (SQLException printEx) {
+//			logger.log(Level.SEVERE, printEx.getMessage(), printEx);
+//		}
+//	}
+//	public static void main(String[] args) {
+//		DatabaseConnection con = new DatabaseConnection();		
+//		con.createDatabase();
+//		con.printAllTables();
+//	}
 }

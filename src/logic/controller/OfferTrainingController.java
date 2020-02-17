@@ -5,17 +5,30 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import logic.DAO;
+import logic.TrainingFormBean;
 import logic.entity.Gym;
 
 public class OfferTrainingController {
+	
+	private static OfferTrainingController instance = null;
 
-	private String username = "manager"; //
+	private OfferTrainingController() {}
+
+		public static synchronized OfferTrainingController getInstance(){
+			if(OfferTrainingController.instance == null){
+				OfferTrainingController.instance = new OfferTrainingController();
+			}
+			return OfferTrainingController.instance;
+		}
+
+	private Integer id = 1; 
+	private TrainingFormBean trainingBean;
 
 	DAO dao = DAO.getInstance();
 
 	public ObservableList<String> getTrainingList(){
 
-		ObservableList<String> trainingList = FXCollections.observableArrayList(dao.getTtrainingList());
+		ObservableList<String> trainingList = FXCollections.observableArrayList(dao.getTrainingList());
 		return trainingList;
 	}
 
@@ -26,14 +39,22 @@ public class OfferTrainingController {
 			list.add(g.getTrainers().get(key));
 		}
 		ObservableList<String> trainerList = FXCollections.observableArrayList(list); 
-		//System.out.println(getGymEntity().getName());	
 		return trainerList;
 	}
-
+	
+	
 
 	public Gym getGymEntity(/*user name dynamically gotten*/) {
-		Gym gym = dao.getGymEntity(username); //this method is a dummy needs to be implemented
+		Gym gym = dao.getGymEntity(id); //this method is a dummy needs to be implemented
 		return gym;
+	}
+	
+	public TrainingFormBean getTrainingBean() {
+		return trainingBean;
+	}
+
+	public void setTrainingBean(TrainingFormBean trainingBean) {
+		this.trainingBean = trainingBean;
 	}
 }
 

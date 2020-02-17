@@ -28,7 +28,7 @@ public class DAO {
 
 	private static final String URL = "jdbc:postgresql://localhost:5432/fitappdb";
 	private static final String USR = "postgres";
-	private static final String PWD= "postgres";
+	private static final String PWD= "password";
 	private final Logger logger = Logger.getLogger(getClass().getName());
 
 
@@ -52,9 +52,9 @@ public class DAO {
 		return false;
 	}
 
-	public List<String> getTtrainingList() {
+	public List<String> getTrainingList() {
 		ArrayList<String> trainingList = new ArrayList<>();
-		String query = "select * from trainingtypes;";
+		String query = "select * from course;";
 		try (Connection con = DriverManager.getConnection(URL,USR,PWD);
 				PreparedStatement pst = con.prepareStatement(query);
 				ResultSet rs = pst.executeQuery()){
@@ -67,8 +67,9 @@ public class DAO {
 		return trainingList;
 	}
 
-	public Gym getGymEntity(String username) {
-		Integer gymId = 0;
+	public Gym getGymEntity(Integer gymId) {
+//		Integer gymId = 0;
+		String gymName = null;
 		int managerId = 0;
 		String managerName = null;
 		String street = "";
@@ -77,13 +78,14 @@ public class DAO {
 		boolean found = false;
 		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
 				PreparedStatement pst = con.prepareStatement(
-						"select gym_id, street, manager_id, manager_name"
-						+ " from gym where gym_name = ?")){
-			pst.setString(1,username);
+						"select gym_name, street, manager_id, manager_name"
+						+ " from gym where gym_id = ?")){
+			pst.setInt(1,gymId);
 			try(ResultSet rs = pst.executeQuery()){
 				if(rs.next()) {
 					found = true;
-					gymId = rs.getInt("gym_id");
+					gymName = rs.getString("gym_name");
+//					gymId = rs.getInt("gym_id");
 					street = rs.getString("street");
 					managerId = rs.getInt("manager_id");
 					managerName = rs.getString("manager_name");
@@ -97,7 +99,7 @@ public class DAO {
 			courses = getCourses();
 		}
 		
-		return new Gym(gymId, username, managerId, managerName, street, trainers, courses);
+		return new Gym(gymId, gymName, managerId, managerName, street, trainers, courses);
 	}
 
 	// return a map of registered trainer for the current gymUser instance
@@ -155,12 +157,14 @@ public class DAO {
 			logger.log(Level.SEVERE, fillEx.getMessage(), fillEx);
 		}
 	}
+	
+	
 	public static void main(String[] args) {
 		/* useless at the moment */
 		DAO d = DAO.getInstance();
-		//d.resetTable();
-		//d.fillTable();
-		Gym g = d.getGymEntity("gym1");
+//		d.resetTable();
+//		d.fillTable();
+		Gym g = d.getGymEntity(1);
 		System.out.println("id: "+g.getGymId());
 		System.out.println("gymName: "+g.getGymName());
 		System.out.println("managerid: "+g.getManagerId());

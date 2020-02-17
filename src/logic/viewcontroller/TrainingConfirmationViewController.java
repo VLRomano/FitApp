@@ -1,12 +1,18 @@
 package logic.viewcontroller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import logic.TrainingFormBean;
+import logic.controller.OfferTrainingController;
 
-public class TrainingConfirmationViewController {
+public class TrainingConfirmationViewController implements Initializable {
 
     @FXML
     private Label homeLabel;
@@ -46,10 +52,36 @@ public class TrainingConfirmationViewController {
 
     @FXML
     private Button okButton;
+    
+    @FXML
+    private Button modifyButton;
+    
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+    	OfferTrainingController OTController = OfferTrainingController.getInstance();
+    	TrainingFormBean bean = OTController.getTrainingBean();
+    	
+    	if(bean.getSingle()) {
+    		singleText.setText("singolo");
+    	}
+    	if(bean.getGroup()) {
+    		singleText.setText("gruppo");
+    	}
+    	typeText.setText(bean.getTrainingType());
+    	nameText.setText(bean.getTrainingName());
+    	trainerText.setText(bean.getTrainerName());
+    	
+		
+	}
+
 
     @FXML
     void onMouseClickedEvent(MouseEvent event) {
-
+    	
     }
+
+
+
 
 }

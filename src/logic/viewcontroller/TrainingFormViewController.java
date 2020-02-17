@@ -1,7 +1,10 @@
 package logic.viewcontroller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,8 +21,15 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import logic.TrainingFormBean;
 import logic.controller.OfferTrainingController;
+import logic.factory.AbstractSubView;
+import logic.factory.SubViewFactory;
+import logic.fxmlcontrollers.MainController;
 
 public class TrainingFormViewController implements Initializable{
+	
+	OfferTrainingController OTController = OfferTrainingController.getInstance();
+	
+	private final Logger logger = Logger.getLogger(getClass().getName());
 
 	 @FXML
 	    private Label homeLabel;
@@ -65,14 +75,14 @@ public class TrainingFormViewController implements Initializable{
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-		OfferTrainingController ctrl = new OfferTrainingController();
-		ObservableList<String> typeList = ctrl.getTrainingList();
+    	
+		ObservableList<String> typeList = OTController.getTrainingList();
     	trainingTypeCBox.setItems(typeList);
     	trainingTypeCBox.setValue(typeList.get(0));
     	
-    	ObservableList<String> trainerList = ctrl.getTrainerList();
+    	ObservableList<String> trainerList = OTController.getTrainerList();
     	trainerCBox.setItems(trainerList);
-    	trainerCBox.setValue(trainerList.get(0));
+    	trainerCBox.setValue(trainerList.get(0)); 	System.out.println("start initialization");
     	
     	startHourCBox.getItems().addAll(hourGenerator());
     	startHourCBox.setPromptText("HH");
@@ -110,10 +120,19 @@ public class TrainingFormViewController implements Initializable{
 			bean.setDate(datePicker.getValue());
 			bean.setDescription(descriptionTArea.getText());
 			
-			//TODO launch confirmation screen
+			OTController.setTrainingBean(bean);	
 			
+			//TODO: create check schedule for trainer in OfferTrainingController
 			
-			System.out.println(bean.getDescription());
+			logger.log(Level.INFO, "onto confirmation screen");
+			try {
+				SubViewFactory factory = SubViewFactory.getInstance();
+				AbstractSubView subview = factory.createSubView(3);
+				MainController ctrl = MainController.getInstance();
+				ctrl.replace(MainController.getContainer(), subview);
+			} catch (IOException e) {
+				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
+			}
 		}
     }
     
