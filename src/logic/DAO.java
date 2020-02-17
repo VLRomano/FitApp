@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,35 +26,18 @@ public class DAO {
 		return DAO.instance;
 	}
 
-	private Connection connection = null;
 	private static final String URL = "jdbc:postgresql://localhost:5432/fitappdb";
 	private static final String USR = "postgres";
-	private static final String PWD= "password";
+	private static final String PWD= "postgres";
 	private final Logger logger = Logger.getLogger(getClass().getName());
-	public Connection getConnection(){
-		return this.connection;
-	}
 
-	public void createDatabase(Connection con) {
-		if(con!=null) {
-			try(PreparedStatement pst = con.prepareStatement(Query.getCreateTable())){
-				pst.executeUpdate();
-				con.close();
-			} catch (SQLException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
-			}
-		} else {
-			DatabaseConnection newDbCon = new DatabaseConnection();
-			newDbCon.createDatabase(newDbCon.getConnection());
-		}
-	}
+
 	public boolean checkLogIn(String username, String password) {
 		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
-			PreparedStatement pst = con.prepareStatement(Query.getLogin())){
+				PreparedStatement pst = con.prepareStatement(Query.getLogin())){
 			pst.setString(1, username);
 			pst.setString(2, password);
 			try(ResultSet rs = pst.executeQuery()){
-				System.out.println(rs);
 				rs.next();
 				if(rs.getInt(1)>0) {
 					logger.log(Level.INFO,"user found");
@@ -61,14 +46,13 @@ public class DAO {
 					logger.log(Level.SEVERE, "Wrong Username or Password");
 				}
 			}
-		} catch (SQLException connException) {
-			logger.log(Level.SEVERE, connException.getMessage(),connException);
+		} catch (SQLException connEx) {
+			logger.log(Level.SEVERE, connEx.getMessage(),connEx);
 		}		
 		return false;
 	}
-	
+
 	public List<String> getTtrainingList() {
-		
 		ArrayList<String> trainingList = new ArrayList<>();
 		String query = "select * from trainingtypes;";
 		try (Connection con = DriverManager.getConnection(URL,USR,PWD);
@@ -77,63 +61,112 @@ public class DAO {
 			while(rs.next()) {
 				trainingList.add(rs.getString(1));
 			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (SQLException trainingListEx) {
+			logger.log(Level.SEVERE, trainingListEx.getMessage(),trainingListEx);
 		}
 		return trainingList;
 	}
-	
+
 	public Gym getGymEntity(String username) {
+		Integer gymId = 0;
+		int managerId = 0;
+		String managerName = null;
+		String street = "";
+		Map<Integer, String> trainers = null;
+		Map<Integer, String> courses = null;
+		boolean found = false;
+		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
+				PreparedStatement pst = con.prepareStatement(
+						"select gym_id, street, manager_id, manager_name"
+						+ " from gym where gym_name = ?")){
+			pst.setString(1,username);
+			try(ResultSet rs = pst.executeQuery()){
+				if(rs.next()) {
+					found = true;
+					gymId = rs.getInt("gym_id");
+					street = rs.getString("street");
+					managerId = rs.getInt("manager_id");
+					managerName = rs.getString("manager_name");
+				}
+			}
+		} catch(SQLException gymEx) {
+			logger.log(Level.SEVERE, gymEx.getMessage(), gymEx);
+		}
+		if(found) {
+			trainers = getTrainers(gymId);
+			courses = getCourses();
+		}
 		
-		List<String> courses = new ArrayList<String>();
-		courses.add("One");
-		courses.add("Two");
-		courses.add("Three");
-		courses.add("Four");
-		
-		List<String> trainers = new ArrayList<String>();
-		trainers.add("TOne");
-		trainers.add("TTwo");
-		trainers.add("TThree");
-		trainers.add("TFour");
-		
-		int id = 1;
-		String name = "palestra";
-		String position = "via generica";
-		
-		Gym gym = new Gym();
-		
-		gym.setCourses(courses);
-		gym.setId(id);
-		gym.setName(name);
-		gym.setPosition(position);
-		gym.setTrainers(trainers);
-		
-//		String query = "select * from gym where username = ?";
-//		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
-//			PreparedStatement pst = con.prepareStatement(query)){
-//			pst.setString(1, username);
-//			try(ResultSet rs = pst.executeQuery()){
-//				if(rs.next()) {
-//					logger.log(Level.INFO,"gym found");
-//					gym.setName(rs.getString("gymname"));
-//					//TODO finish initializing the gym entity
-//				}
-//			}		
-//		} catch (SQLException e1) {
-//			logger.log(Level.SEVERE, e1.getMessage(),e1);
-//		}
-		
-		
-//		gym.setId(id);
-//		gym.setName(name);
-		
-		return gym;
+		return new Gym(gymId, username, managerId, managerName, street, trainers, courses);
 	}
-	
+
+	// return a map of registered trainer for the current gymUser instance
+	public Map<Integer,String> getTrainers(int gymId) {
+		HashMap<Integer, String> tMap = new HashMap<>();
+		Integer tId;
+		String tName;
+		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
+				PreparedStatement pst = con.prepareStatement(
+						"select trainer_id, trainer_name from trainer where gym_id = ?")){
+			pst.setInt(1, gymId);
+			try(ResultSet rs = pst.executeQuery()){
+				while(rs.next()) {
+					tId = rs.getInt("trainer_id");
+					tName = rs.getString("trainer_name");
+					if(!tMap.containsKey(tId))
+						tMap.put(tId, tName);
+				}
+			}
+		} catch(SQLException trainerEx) {
+			logger.log(Level.SEVERE, trainerEx.getMessage(), trainerEx);
+		}
+		return tMap;
+	}
+
+	// return a map of all available courses in the database
+	public Map<Integer, String> getCourses(){
+		HashMap<Integer, String> cMap = new HashMap<>();
+		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
+				PreparedStatement pst = con.prepareStatement(
+						"select course_id, course_name from course")){
+			try(ResultSet rs = pst.executeQuery()){
+				while(rs.next()) {
+					cMap.put(rs.getInt(1), rs.getString(2));
+				}
+			}
+		} catch(SQLException courseEx) {
+			logger.log(Level.SEVERE, courseEx.getMessage(), courseEx);
+		}
+		return cMap;
+	}
+	public void resetTable() {
+		try(Connection con = DriverManager.getConnection(URL, USR, PWD);
+				PreparedStatement pst = con.prepareStatement(Query.getResetTable())){
+			pst.executeQuery();
+		} catch (SQLException resetEx) {
+			logger.log(Level.SEVERE, resetEx.getMessage(), resetEx);
+		}
+	}
+	public void fillTable() {
+		try(Connection con = DriverManager.getConnection(URL, USR, PWD);
+				PreparedStatement pst = con.prepareStatement(Query.getFillTable())){
+			pst.execute();
+		} catch (SQLException fillEx) {
+			logger.log(Level.SEVERE, fillEx.getMessage(), fillEx);
+		}
+	}
 	public static void main(String[] args) {
-		DatabaseConnection con = new DatabaseConnection();		
-		con.createDatabase(con.getConnection());
+		/* useless at the moment */
+		DAO d = DAO.getInstance();
+		//d.resetTable();
+		//d.fillTable();
+		Gym g = d.getGymEntity("gym1");
+		System.out.println("id: "+g.getGymId());
+		System.out.println("gymName: "+g.getGymName());
+		System.out.println("managerid: "+g.getManagerId());
+		System.out.println("manager name: "+g.getManagerName());
+		System.out.println("street: "+g.getstreet());
+		System.out.println("course list: "+g.getCourses());
+		System.out.println("trainer list: "+g.getTrainers());
 	}
 }

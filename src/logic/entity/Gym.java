@@ -1,43 +1,70 @@
 package logic.entity;
-
-import java.util.List;
+import java.util.Map;
 
 public class Gym {
 	
-	private int id;
-	private String name;
-	private String position;
-	private List<String> trainers;
-	private List<String> courses;
+
+	private int gymId;
+	private String gymName;
+	private int managerId;
+	private String managerName;
+	private String street;
+	private Map<Integer, String> trainers;
+	private Map<Integer, String> courses;
 	
-	public int getId() {
-		return id;
+	public Gym() {}
+	public Gym(int gymId, String gymName, int managerId, 
+			String managerName,  String street,
+			Map<Integer, String> trainers,
+			Map<Integer, String> courses) {
+		setGymId(gymId);
+		setGymName(gymName);
+		setManagerId(managerId);
+		setManagerName(managerName);
+		setstreet(street);
+		setTrainers(trainers);
+		setCourses(courses);
 	}
-	public void setId(int id) {
-		this.id = id;
+	public int getGymId() {
+		return gymId;
 	}
-	public String getName() {
-		return name;
+	public void setGymId(int gymId) {
+		this.gymId = gymId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public String getGymName() {
+		return gymName;
 	}
-	public String getPosition() {
-		return position;
+	public void setGymName(String gymName) {
+		this.gymName = gymName;
 	}
-	public void setPosition(String position) {
-		this.position = position;
+	public String getManagerName() {
+		return managerName;
 	}
-	public List<String> getTrainers() {
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+	public int getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(int managerId) {
+		this.managerId = managerId;
+	}
+	public String getstreet() {
+		return street;
+	}
+	public void setstreet(String street) {
+		this.street = street;
+	}
+	public Map<Integer, String> getTrainers() {
 		return trainers;
 	}
-	public void setTrainers(List<String> trainers) {
+	public void setTrainers(Map<Integer, String> trainers) {
 		this.trainers = trainers;
 	}
-	public List<String> getCourses() {
+	public Map<Integer, String> getCourses() {
 		return courses;
 	}
-	public void setCourses(List<String> courses) {
+	public void setCourses(Map<Integer, String> courses) {
 		this.courses = courses;
 	}
 }
