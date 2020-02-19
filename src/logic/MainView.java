@@ -37,7 +37,7 @@ public class MainView extends Application {
 		}
 	}
 	public void load() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/logic/fxmls/Container.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/logic/fxml/Container.fxml"));
 		 setRoot(loader.load());
 	}
 

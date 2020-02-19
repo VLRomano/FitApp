@@ -17,10 +17,10 @@ public enum SubViewURL {
 		throw new IllegalArgumentException("No URL found");
 	}
 	private static String[] path = {
-			"/logic/fxmls/Login.fxml",
-			"/logic/fxmls/OfferTrainingForm.fxml",
-			"/logic/fxmls/BookingForm.fxml",
-			"/logic/fxmls/OfferTrainingConfirmation.fxml"
+			"/logic/fxml/Login.fxml",
+			"/logic/fxml/OfferTrainingForm.fxml",
+			"/logic/fxml/BookingForm.fxml",
+			"/logic/fxml/OfferTrainingConfirmation.fxml"
 	};
 	public static String getURL(int type) {
 		return path[getURLItem(type).type];

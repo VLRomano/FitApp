@@ -23,7 +23,7 @@
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="38.0" prefWidth="800.0">
+            <HBox prefHeight="38.0" prefWidth="800.0" styleClass="topBar" stylesheets="@../styles.css">
                <children>
                   <Label fx:id="homeLabel" text="Home &gt; ">
                      <padding>
@@ -37,7 +37,7 @@
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets />
                </VBox.margin>
             </HBox>
             <Label text="Training session form">

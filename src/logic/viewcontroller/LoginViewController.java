@@ -2,6 +2,7 @@ package logic.viewcontroller;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import animatefx.animation.ZoomIn;
 import animatefx.animation.ZoomOut;
 import javafx.event.ActionEvent;
@@ -16,10 +17,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import logic.LoginBean;
+import logic.controller.LoginController;
+import logic.controller.MainController;
 import logic.factory.AbstractSubView;
 import logic.factory.SubViewFactory;
-import logic.fxmlcontrollers.LoginController;
-import logic.fxmlcontrollers.MainController;
 
 public class LoginViewController {
 	private final Logger logger = Logger.getLogger(getClass().getName());

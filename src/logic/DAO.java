@@ -28,7 +28,7 @@ public class DAO {
 
 	private static final String URL = "jdbc:postgresql://localhost:5432/fitappdb";
 	private static final String USR = "postgres";
-	private static final String PWD= "password";
+	private static final String PWD= "postgres";
 	private final Logger logger = Logger.getLogger(getClass().getName());
 
 
@@ -108,8 +108,7 @@ public class DAO {
 		Integer tId;
 		String tName;
 		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
-				PreparedStatement pst = con.prepareStatement(
-						"select trainer_id, trainer_name from trainer where gym_id = ?")){
+				PreparedStatement pst = con.prepareStatement(Query.getTrainerList())){
 			pst.setInt(1, gymId);
 			try(ResultSet rs = pst.executeQuery()){
 				while(rs.next()) {
@@ -129,8 +128,7 @@ public class DAO {
 	public Map<Integer, String> getCourses(){
 		HashMap<Integer, String> cMap = new HashMap<>();
 		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
-				PreparedStatement pst = con.prepareStatement(
-						"select course_id, course_name from course")){
+				PreparedStatement pst = con.prepareStatement(Query.getCourseList())){
 			try(ResultSet rs = pst.executeQuery()){
 				while(rs.next()) {
 					cMap.put(rs.getInt(1), rs.getString(2));
