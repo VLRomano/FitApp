@@ -53,7 +53,7 @@
 				</HBox>
 			</top>
 			<bottom>
-				<HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+				<HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" styleClass="bottomBar" stylesheets="@../styles.css" VBox.vgrow="NEVER">
 					<children>
 						<Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
 						</Label>

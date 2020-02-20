@@ -7,6 +7,7 @@ import logic.GymPageSubView;
 import logic.LoginView;
 import logic.TrainingConfirmationSubView;
 import logic.TrainingFormSubView;
+import logic.UserPageSubView;
 
 public class SubViewFactory {
 	private static SubViewFactory instance = null;
@@ -24,7 +25,7 @@ public class SubViewFactory {
 		case 1: // return gymPage
 			return new GymPageSubView(type);
 		case 2: // return userPage
-			return new TrainingConfirmationSubView(type);
+			return new UserPageSubView(type);
 		case 3: // return offerTraining
 			return new TrainingFormSubView(type);
 		case 4:

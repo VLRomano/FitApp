@@ -56,44 +56,52 @@ public class LoginViewController {
 	@FXML
 	private void handleButtonEvent(ActionEvent event) throws IOException {
 		if(event.getSource().equals(btnNoAcc)) {
-			new ZoomOut(pnSignIn).play();
-			pnSignIn.toBack();
-			new ZoomIn(pnSignUp).play();
-			pnSignUp.setVisible(true);
-			pnSignUp.toFront();
+			loginAnimation(true);
 		}
 		if(event.getSource().equals(btnSignUp)) {
 			String email = tfEmailAddr.getText();
 			if(!email.equals(""))
-				// TODO: implement a real mailing system.
 				logger.log(Level.INFO,"Sending email to: "+tfEmailAddr.getText());
 		}
 		if(event.getSource().equals(btnLogIn)) {
 			String username = tfUsername.getText();
 			String password = tfPwd.getText();
 			if(!username.equals("") && !password.equals("")) {
-				LoginController ctrl = new LoginController();
-				LoginBean bean = new LoginBean(username, password);
-				if (ctrl.checkAuthentication(bean)) {
-					SubViewFactory factory = SubViewFactory.getInstance();
-					AbstractSubView subview;
-					if(bean.getType()) {
-						 subview = factory.createSubView(1);
-					} else {
-						subview = factory.createSubView(2);
-					}
-					MainController.getInstance().replace(MainController.getContainer(), subview);
-				}
+				loginTransitions(username, password);
 			}
 		}
 	}
-
+	private void loginTransitions(String username, String password) throws IOException {
+		LoginController ctrl = new LoginController();
+		LoginBean bean = new LoginBean(username, password);
+		if (ctrl.checkAuthentication(bean)) {
+			SubViewFactory factory = SubViewFactory.getInstance();
+			AbstractSubView subview;
+			if(bean.getType()) {
+				 subview = factory.createSubView(1);
+			} else {
+				subview = factory.createSubView(2);
+			}
+			MainController.getInstance().replace(MainController.getContainer(), subview);
+		}
+	}
 	@FXML
 	private void handleMouseEvent(MouseEvent event){
 		if(event.getSource()==btnClose) {
 			System.exit(0);
 		}
 		if(event.getSource().equals(btnBack)) {
+			loginAnimation(false);
+		}
+	}
+	private void loginAnimation(boolean animation) {
+		if(animation) {
+			new ZoomOut(pnSignIn).play();
+			pnSignIn.toBack();
+			new ZoomIn(pnSignUp).play();
+			pnSignUp.setVisible(true);
+			pnSignUp.toFront();
+		} else {
 			new ZoomOut(pnSignUp).play();
 			pnSignUp.toBack();
 			new ZoomIn(pnSignIn).play();

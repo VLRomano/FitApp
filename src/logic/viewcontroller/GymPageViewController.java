@@ -1,16 +1,26 @@
 package logic.viewcontroller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import logic.controller.MainController;
+import logic.factory.AbstractSubView;
+import logic.factory.SubViewFactory;
 
 public class GymPageViewController {
+	private final Logger logger = Logger.getLogger(getClass().getName());
+
 	@FXML
 	private ResourceBundle resources;
 
@@ -53,6 +63,18 @@ public class GymPageViewController {
 	@FXML
 	private Label sideGymStreet;
 
+	MainController ctrl = MainController.getInstance();
+	SubViewFactory factory = SubViewFactory.getInstance();
+	AbstractSubView subview;
+	public void handleMouseEvent(MouseEvent event) {
+		if(event.getSource().equals(logOutIcon)) {
+			try {
+				ctrl.replace(MainController.getContainer(), factory.createSubView(0));
+			} catch (IOException e) {
+				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
+			}
+		}
+	}
 	@FXML
 	void initialize() {
 		assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'GymPage.fxml'.";
@@ -67,6 +89,5 @@ public class GymPageViewController {
 		assert sideUsername != null : "fx:id=\"sideUsername\" was not injected: check your FXML file 'GymPage.fxml'.";
 		assert sideGymName != null : "fx:id=\"sideGymName\" was not injected: check your FXML file 'GymPage.fxml'.";
 		assert sideGymStreet != null : "fx:id=\"sideGymStreet\" was not injected: check your FXML file 'GymPage.fxml'.";
-
 	}
 }
