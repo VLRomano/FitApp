@@ -2,9 +2,11 @@ package logic.factory;
 
 public enum SubViewURL {
 	LOGIN(0),
-	OFFERTRAININGFORM(1), 
-	BOOKINGFORM(2),
-	OFFERTRAININGCONFIRMATION(3);
+	GYMPAGE(1),
+	USERPAGE(2),
+	OFFERTRAININGFORM(3), 
+	BOOKINGFORM(4),
+	OFFERTRAININGCONFIRMATION(5);
 	/* MAX SUBVIEW DIM: 900 x 542
 	 * */
 	
@@ -18,6 +20,8 @@ public enum SubViewURL {
 	}
 	private static String[] path = {
 			"/logic/fxml/Login.fxml",
+			"/logic/fxml/GymPage.fxml",
+			"/logic/fxml/UserPage.fxml",
 			"/logic/fxml/OfferTrainingForm.fxml",
 			"/logic/fxml/BookingForm.fxml",
 			"/logic/fxml/OfferTrainingConfirmation.fxml"

@@ -73,10 +73,15 @@ public class LoginViewController {
 			String password = tfPwd.getText();
 			if(!username.equals("") && !password.equals("")) {
 				LoginController ctrl = new LoginController();
-				if (ctrl.checkAuthentication(new LoginBean(username, password))) {
-					/*logger.log(Level.INFO,"User logged");*/
+				LoginBean bean = new LoginBean(username, password);
+				if (ctrl.checkAuthentication(bean)) {
 					SubViewFactory factory = SubViewFactory.getInstance();
-					AbstractSubView subview = factory.createSubView(1);
+					AbstractSubView subview;
+					if(bean.getType()) {
+						 subview = factory.createSubView(1);
+					} else {
+						subview = factory.createSubView(2);
+					}
 					MainController.getInstance().replace(MainController.getContainer(), subview);
 				}
 			}

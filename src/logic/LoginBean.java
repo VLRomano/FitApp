@@ -9,7 +9,16 @@ public class LoginBean {
 	
 	private String password;
 	private String username;
+	private boolean type = false;
 	
+	public boolean getType() {
+		return type;
+	}
+
+	public void setType(boolean type) {
+		this.type = type;
+	}
+
 	public String getUsername() {
 		return username;
 	}

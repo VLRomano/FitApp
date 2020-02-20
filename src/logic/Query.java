@@ -72,7 +72,7 @@ public class Query {
 			"insert into training_session(trainer_id, trainer_name, course_id, individual, gym_id, street, time_start, time_end, date, description) values (4,'t3',3, true, 2, 'street2', '10.30', '11.30', '3.3.2020','session_3');";
 	private static String courseList = "select course_id, course_name from course";
 	private static String login =
-			"select user_id from users where username = ? and password = ?;";
+			"select user_id, manager from users where username = ? and password = ?;";
 	private static String trainerList = "select trainer_id, trainer_name from trainer where gym_id = ?;";
 	public static String getTrainerList() {
 		return trainerList;

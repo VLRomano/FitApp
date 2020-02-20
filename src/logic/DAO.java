@@ -32,7 +32,9 @@ public class DAO {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 
 
-	public boolean checkLogIn(String username, String password) {
+	public boolean checkLogIn(LoginBean bean) {
+		String username = bean.getUsername();
+		String password = bean.getPassword();
 		try(Connection con = DriverManager.getConnection(URL,USR,PWD);
 				PreparedStatement pst = con.prepareStatement(Query.getLogin())){
 			pst.setString(1, username);
@@ -41,10 +43,14 @@ public class DAO {
 				rs.next();
 				if(rs.getInt(1)>0) {
 					logger.log(Level.INFO,"user found");
+					if(rs.getBoolean("manager")) {
+						bean.setType(true);
+					}
 					return true;
 				} else {
 					logger.log(Level.SEVERE, "Wrong Username or Password");
 				}
+			
 			}
 		} catch (SQLException connEx) {
 			logger.log(Level.SEVERE, connEx.getMessage(),connEx);

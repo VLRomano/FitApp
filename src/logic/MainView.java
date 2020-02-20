@@ -38,7 +38,7 @@ public class MainView extends Application {
 	}
 	public void load() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/logic/fxml/Container.fxml"));
-		 setRoot(loader.load());
+		setRoot(loader.load());
 	}
 
 	@Override
@@ -61,8 +61,8 @@ public class MainView extends Application {
 			AbstractSubView subview = factory.createSubView(0);
 			ctrl.replace((BorderPane)getAllNodes(root).get(0), subview);
 			mainStage.show();
-		} catch (Exception e) {
-			logger.log(Level.SEVERE,"Unable to load application: "+e);
+		} catch (IllegalStateException e) {
+			logger.log(Level.SEVERE,"Unable to load application: "+getClass().getName()+"\nException: "+e);
 		}
 
 	}
