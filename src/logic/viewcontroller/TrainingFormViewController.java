@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -18,6 +20,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import logic.TrainingFormBean;
 import logic.controller.OfferTrainingController;
@@ -121,18 +124,9 @@ public class TrainingFormViewController implements Initializable{
 			bean.setDescription(descriptionTArea.getText());
 
 			OTController.setTrainingBean(bean);	
+			OTController.checkValidity();
 
 			//TODO: create check schedule for trainer in OfferTrainingController
-
-			logger.log(Level.INFO, "onto confirmation screen");
-			try {
-				SubViewFactory factory = SubViewFactory.getInstance();
-				AbstractSubView subview = factory.createSubView(3);
-				MainController ctrl = MainController.getInstance();
-				ctrl.replace(MainController.getContainer(), subview);
-			} catch (IOException e) {
-				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
-			}
 		}
 	}
 
@@ -145,4 +139,13 @@ public class TrainingFormViewController implements Initializable{
 			list[i] = i;
 		return list;
 	}
+	
+	public void showDateAlert() {
+    	Alert dateAlert = new Alert(AlertType.ERROR, "You cannot select a past date", ButtonType.OK);
+    	dateAlert.showAndWait();
+    	
+    	if(dateAlert.getResult() == ButtonType.OK) {
+    		dateAlert.close();
+    	}
+    }
 }

@@ -58,6 +58,4 @@ public class MainViewController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		MainController.setContainer(container);
 	}	
-
-
 }

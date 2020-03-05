@@ -28,10 +28,10 @@ public class SubViewFactory {
 			return new UserPageSubView(type);
 		case 3: // return offerTraining
 			return new TrainingFormSubView(type);
-		case 4:
+		case 5:
 			return new TrainingConfirmationSubView(type);
 		default:
-			throw new IOException("SubViewFactory exception");
+			throw new IOException("Factory exception: SubView not found");
 		}
 	}
 }

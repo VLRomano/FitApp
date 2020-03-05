@@ -73,6 +73,18 @@ public class GymPageViewController {
 			} catch (IOException e) {
 				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
 			}
+		}	
+	}
+	
+	@FXML
+	private void onMouseClickedEvent(MouseEvent event) {
+		if(event.getSource().equals(newSession)) {
+			try {
+				ctrl.replace(MainController.getContainer(), factory.createSubView(3));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
 		}
 	}
 	@FXML
