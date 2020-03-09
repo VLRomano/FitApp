@@ -6,7 +6,8 @@ public enum SubViewURL {
 	USERPAGE(2),
 	OFFERTRAININGFORM(3), 
 	BOOKINGFORM(4),
-	OFFERTRAININGCONFIRMATION(5);
+	OFFERTRAININGCONFIRMATION(5),
+	CARD(6);
 	/* MAX SUBVIEW DIM: 900 x 542
 	 * */
 
@@ -24,7 +25,8 @@ public enum SubViewURL {
 			"/logic/fxml/UserPage.fxml",
 			"/logic/fxml/OfferTrainingForm.fxml",
 			"/logic/fxml/BookingForm.fxml",
-			"/logic/fxml/OfferTrainingConfirmation.fxml"
+			"/logic/fxml/OfferTrainingConfirmation.fxml",
+			"/logic/fxml/Card.fxml"
 	};
 	public static String getViewByType(int type) {
 		return path[getURLItem(type).type];

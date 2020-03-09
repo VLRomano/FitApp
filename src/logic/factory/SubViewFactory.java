@@ -1,8 +1,6 @@
 package logic.factory;
 
 import java.io.IOException;
-
-
 import logic.GymPageSubView;
 import logic.LoginView;
 import logic.TrainingConfirmationSubView;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import animatefx.animation.FadeIn;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -61,6 +61,7 @@ public class MainView extends Application {
 			AbstractSubView subview = factory.createSubView(0);
 			ctrl.replace((BorderPane)getAllNodes(root).get(0), subview);
 			mainStage.show();
+			new FadeIn(root).play();
 		} catch (IllegalStateException e) {
 			logger.log(Level.SEVERE,"UNABLE TO START APPLICATION: error at "+getClass().getName()+"\n"
 					+ "Exception "+e+"\n"
