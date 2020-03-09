@@ -9,6 +9,7 @@ public class LoginBean {
 	
 	private String password;
 	private String username;
+	private int id;
 	private boolean type = false;
 	
 	public boolean getType() {
@@ -35,9 +36,11 @@ public class LoginBean {
 		this.password = password;
 	}
 
-	
-	
-	
-	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 }

@@ -2,6 +2,8 @@ package logic.viewcontroller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,10 +13,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import logic.controller.MainController;
+import logic.dao.SessionDAO;
+import logic.dao.UserDAO;
+import logic.entity.Session;
+import logic.entity.User;
 import logic.factory.AbstractSubView;
 import logic.factory.SubViewFactory;
 
@@ -45,7 +52,7 @@ public class UserPageViewController {
 	private ListView<?> reviewList;
 
 	@FXML
-	private ListView<?> sessionList;
+	private ListView<String> sessionList;
 
 	@FXML
 	private ImageView sideUserIcon;
@@ -59,9 +66,10 @@ public class UserPageViewController {
 	@FXML
 	private Label sideGymStreet;
 
-	MainController ctrl = MainController.getInstance();
-	SubViewFactory factory = SubViewFactory.getInstance();
-	AbstractSubView subview;
+	private MainController ctrl = MainController.getInstance();
+	private SubViewFactory factory = SubViewFactory.getInstance();
+	private User user;
+	
 	public void handleMouseEvent(MouseEvent event) {
 		if(event.getSource().equals(logOutIcon)) {
 			try {
@@ -71,7 +79,18 @@ public class UserPageViewController {
 			}
 		}
 	}
-
+	public void fillActiveSessions() {
+		SessionDAO sDao = SessionDAO.getInstance();
+		// get the id list of booked sessions
+		ArrayList<Integer> bookings = (ArrayList<Integer>) sDao.getBooking(user.getUserId());
+		// get the actual list
+		ArrayList<Session> list = (ArrayList<Session>) sDao.getSessionList(bookings);
+		for(Session s : list) {
+			sessionList.getItems().add("session id: "+s.getSessionId());
+			  // set selection mode to single
+            sessionList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		}
+	}
 	@FXML
 	void initialize() {
 		assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'UserPage.fxml'.";
@@ -85,6 +104,10 @@ public class UserPageViewController {
 		assert sideUsername != null : "fx:id=\"sideUsername\" was not injected: check your FXML file 'UserPage.fxml'.";
 		assert sideGymName != null : "fx:id=\"sideGymName\" was not injected: check your FXML file 'UserPage.fxml'.";
 		assert sideGymStreet != null : "fx:id=\"sideGymStreet\" was not injected: check your FXML file 'UserPage.fxml'.";
-
+		
+		user = UserDAO.getInstance().getUserEntity(ctrl.getId());
+		sideUsername.setText(user.getUsername());
+		fillActiveSessions();
+		
 	}
 }

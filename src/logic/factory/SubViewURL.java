@@ -9,7 +9,7 @@ public enum SubViewURL {
 	OFFERTRAININGCONFIRMATION(5);
 	/* MAX SUBVIEW DIM: 900 x 542
 	 * */
-	
+
 	private final int type;
 	SubViewURL(int value){
 		this.type = value;
@@ -26,7 +26,10 @@ public enum SubViewURL {
 			"/logic/fxml/BookingForm.fxml",
 			"/logic/fxml/OfferTrainingConfirmation.fxml"
 	};
-	public static String getURL(int type) {
+	public static String getViewByType(int type) {
 		return path[getURLItem(type).type];
+	}
+	public static String getURLbyName(SubViewURL subview) {
+		return path[subview.type];
 	}
 }

@@ -21,7 +21,7 @@ public class UserPageSubView implements AbstractSubView {
 	}
 	@Override
 	public void load(int type) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(SubViewURL.getURL(type)));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(SubViewURL.getViewByType(type)));
 		setRoot(loader.load());
 	}
 	@Override

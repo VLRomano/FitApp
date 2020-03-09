@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.viewcontroller.MainViewController">
+<AnchorPane fx:id="main" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.viewcontroller.MainViewController">
 	<children>
 		<BorderPane fx:id="container" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<top>
@@ -31,7 +31,7 @@
 						</Label>
 						<Button fx:id="place" mnemonicParsing="false" onMouseClicked="#onMouseClickedEvent" prefHeight="25.0" prefWidth="94.0" styleClass="LogInBtn" stylesheets="@../styles.css" text="Button" />
 						<Pane prefHeight="28.0" prefWidth="620.0" />
-						<Circle fx:id="btnReduce" accessibleRole="BUTTON" fill="#43a047" radius="7.0" stroke="#5c7079" strokeType="INSIDE" strokeWidth="2.0">
+						<Circle fx:id="btnReduce" accessibleRole="BUTTON" fill="#43a047" onMouseClicked="#onMouseClickedEvent" radius="7.0" stroke="#5c7079" strokeType="INSIDE" strokeWidth="2.0">
 							<HBox.margin>
 								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
 							</HBox.margin>

@@ -1,5 +1,7 @@
 package logic.viewcontroller;
 import java.io.IOException;
+
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -8,16 +10,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import logic.factory.AbstractSubView;
 import logic.factory.SubViewFactory;
 import logic.controller.MainController;
 
 public class MainViewController implements Initializable{
 	private final Logger logger = Logger.getLogger(getClass().getName());
-
+	
+    @FXML
+    private AnchorPane main;
+    
 	@FXML
 	private HBox topMenu;
 
@@ -40,6 +47,10 @@ public class MainViewController implements Initializable{
 	private void onMouseClickedEvent(MouseEvent event){
 		if(event.getSource()==btnClose) {
 			System.exit(0);
+		}
+		if(event.getSource()==btnReduce) {
+			Stage stage = (Stage)main.getScene().getWindow();
+			stage.setIconified(true);
 		}
 		if(event.getSource() == place) {
 			logger.log(Level.INFO, "placeholder");

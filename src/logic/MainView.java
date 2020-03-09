@@ -62,9 +62,11 @@ public class MainView extends Application {
 			ctrl.replace((BorderPane)getAllNodes(root).get(0), subview);
 			mainStage.show();
 		} catch (IllegalStateException e) {
-			logger.log(Level.SEVERE,"Unable to load application: "+getClass().getName()+"\nException: "+e);
+			logger.log(Level.SEVERE,"UNABLE TO START APPLICATION: error at "+getClass().getName()+"\n"
+					+ "Exception "+e+"\n"
+					+ "Caused by: "+e.getStackTrace()[0]);
+			System.exit(0);
 		}
-
 	}
 	public static List<Node> getAllNodes(Parent p){
 		ArrayList<Node> nodes = new ArrayList<>();

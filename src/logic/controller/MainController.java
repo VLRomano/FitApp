@@ -9,6 +9,15 @@ import logic.factory.AbstractSubView;
 public class MainController {
 	private static MainController instance;
 	private static BorderPane container;
+	private int id = 0; 
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	private MainController() {}
 
@@ -30,16 +39,15 @@ public class MainController {
 	public void replace(BorderPane container, AbstractSubView node) {
 		container.setCenter(node.getRoot());
 	}
-	
+
 	//TODO create a a factory for all alerts
 	public void showDateAlert() {
-    	Alert dateAlert = new Alert(AlertType.ERROR, "You cannot select a past date", ButtonType.OK);	    	dateAlert.showAndWait();
-	    	
-	    if(dateAlert.getResult() == ButtonType.OK) {
-	   		dateAlert.close();
-	   	}
+		Alert dateAlert = new Alert(AlertType.ERROR, "You cannot select a past date", ButtonType.OK);	    	dateAlert.showAndWait();
+
+		if(dateAlert.getResult() == ButtonType.OK) {
+			dateAlert.close();
+		}
 	}
 }
-	
-	
-	
+
+

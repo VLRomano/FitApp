@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -64,27 +66,35 @@ public class LoginViewController {
 				logger.log(Level.INFO,"Sending email to: "+tfEmailAddr.getText());
 		}
 		if(event.getSource().equals(btnLogIn)) {
-			String username = tfUsername.getText();
-			String password = tfPwd.getText();
-			if(!username.equals("") && !password.equals("")) {
-				loginTransitions(username, password);
+			loginTransitions();
+		}
+	}
+	@FXML
+	private void onEnter(KeyEvent key) throws IOException {
+		if(key.getCode().equals(KeyCode.ENTER)) {
+			loginTransitions();
+		}
+	}
+	private void loginTransitions() throws IOException {
+		String username = tfUsername.getText();
+		String password = tfPwd.getText();
+		if(!username.equals("") && !password.equals("")) {
+			LoginController ctrl = new LoginController();
+			LoginBean bean = new LoginBean(username, password);
+			if (ctrl.checkAuthentication(bean)) {
+				MainController.getInstance().setId(bean.getId());
+				SubViewFactory factory = SubViewFactory.getInstance();
+				AbstractSubView subview;
+				if(bean.getType()) {
+					subview = factory.createSubView(1);
+				} else {
+					subview = factory.createSubView(2);
+				}
+				MainController.getInstance().replace(MainController.getContainer(), subview);
 			}
 		}
 	}
-	private void loginTransitions(String username, String password) throws IOException {
-		LoginController ctrl = new LoginController();
-		LoginBean bean = new LoginBean(username, password);
-		if (ctrl.checkAuthentication(bean)) {
-			SubViewFactory factory = SubViewFactory.getInstance();
-			AbstractSubView subview;
-			if(bean.getType()) {
-				 subview = factory.createSubView(1);
-			} else {
-				subview = factory.createSubView(2);
-			}
-			MainController.getInstance().replace(MainController.getContainer(), subview);
-		}
-	}
+
 	@FXML
 	private void handleMouseEvent(MouseEvent event){
 		if(event.getSource()==btnClose) {

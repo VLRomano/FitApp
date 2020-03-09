@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import logic.DAO;
 import logic.TrainingFormBean;
+import logic.dao.GymDAO;
 import logic.entity.Gym;
 import logic.factory.AbstractSubView;
 import logic.factory.SubViewFactory;
@@ -32,12 +32,10 @@ public class OfferTrainingController {
 	private Integer id = 1; 
 	private TrainingFormBean trainingBean;
 
-	DAO dao = DAO.getInstance();
+	GymDAO dao = GymDAO.getInstance();
 
 	public ObservableList<String> getTrainingList(){
-
-		ObservableList<String> trainingList = FXCollections.observableArrayList(dao.getTrainingList());
-		return trainingList;
+		return FXCollections.observableArrayList(dao.getTrainingList());
 	}
 
 	public ObservableList<String> getTrainerList(){
@@ -45,9 +43,8 @@ public class OfferTrainingController {
 		Gym g = getGymEntity();
 		for(Integer key : g.getTrainers().keySet()) {
 			list.add(g.getTrainers().get(key));
-		}
-		ObservableList<String> trainerList = FXCollections.observableArrayList(list); 
-		return trainerList;
+		} 
+		return FXCollections.observableArrayList(list); 
 	}
 	
 	public void checkValidity() {

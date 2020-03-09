@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchRoot" prefHeight="542.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="logic.viewcontroller.LoginViewController">
+<AnchorPane fx:id="anchRoot" prefHeight="542.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.viewcontroller.LoginViewController">
    <children>
       <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -73,8 +73,8 @@
                   </Pane>
                   <Pane fx:id="pnSignIn" prefHeight="307.0" prefWidth="494.0">
                      <children>
-                        <TextField id="tfUser" fx:id="tfUsername" layoutX="131.0" layoutY="166.0" prefHeight="40.0" prefWidth="233.0" promptText="Username" />
-                        <PasswordField id="tfPwd" fx:id="tfPwd" layoutX="131.0" layoutY="231.0" prefHeight="40.0" prefWidth="233.0" promptText="Password" />
+                        <TextField id="tfUser" fx:id="tfUsername" layoutX="131.0" layoutY="166.0" onKeyPressed="#onEnter" prefHeight="40.0" prefWidth="233.0" promptText="Username" />
+                        <PasswordField id="tfPwd" fx:id="tfPwd" layoutX="131.0" layoutY="231.0" onKeyPressed="#onEnter" prefHeight="40.0" prefWidth="233.0" promptText="Password" />
                         <Button id="btnLogIn" fx:id="btnLogIn" layoutX="269.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="31.0" prefWidth="95.0" styleClass="LogInBtn" stylesheets="@../styles.css" text="Log In" wrapText="true" />
                         <Hyperlink id="hlForgot" layoutX="131.0" layoutY="313.0" prefHeight="30.0" prefWidth="133.0" text="Forgot Password?" underline="true">
                            <font>

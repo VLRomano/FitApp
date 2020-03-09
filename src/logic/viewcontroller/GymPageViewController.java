@@ -82,8 +82,7 @@ public class GymPageViewController {
 			try {
 				ctrl.replace(MainController.getContainer(), factory.createSubView(3));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-					e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 	}
