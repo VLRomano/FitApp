@@ -5,8 +5,8 @@ jdk:
 addons:
     sonarcloud:
         organization: vlromano
-        token:
-            secure: b985a8c217b9ff586608fc37fb15f993a393b2b6
+        token: b985a8c217b9ff586608fc37fb15f993a393b2b6
+            
         
 script: 
 - ant build
