@@ -16,8 +16,10 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import logic.controller.CardController;
 import logic.controller.MainController;
+import logic.controller.UserPageController;
 import logic.dao.SessionDAO;
 import logic.dao.UserDAO;
 import logic.entity.Session;
@@ -48,7 +50,7 @@ public class UserPageViewController {
 	private Button newTrainer;
 
 	@FXML
-	private ListView<?> reviewList;
+	private BorderPane schedulepane;
 
 	@FXML
 	private ListView<Parent> sessionList;
@@ -67,6 +69,7 @@ public class UserPageViewController {
 
 	private MainController ctrl = MainController.getInstance();
 	private SubViewFactory factory = SubViewFactory.getInstance();
+	private UserPageController userctrl = new UserPageController();
 	private User user;
 
 	public void handleMouseEvent(MouseEvent event) {
@@ -92,6 +95,7 @@ public class UserPageViewController {
 			sessionList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		}
 	}
+	
 	@FXML
 	void initialize() {
 		assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'UserPage.fxml'.";
@@ -99,7 +103,7 @@ public class UserPageViewController {
 		assert userIcon != null : "fx:id=\"userIcon\" was not injected: check your FXML file 'UserPage.fxml'.";
 		assert logOutIcon != null : "fx:id=\"logOutIcon\" was not injected: check your FXML file 'UserPage.fxml'.";
 		assert newTrainer != null : "fx:id=\"newTrainer\" was not injected: check your FXML file 'UserPage.fxml'.";
-		assert reviewList != null : "fx:id=\"reviewList\" was not injected: check your FXML file 'UserPage.fxml'.";
+		assert schedulepane != null : "fx:id=\"schedulepane\" was not injected: check your FXML file 'UserPage.fxml'.";
 		assert sessionList != null : "fx:id=\"sessionList\" was not injected: check your FXML file 'UserPage.fxml'.";
 		assert sideUserIcon != null : "fx:id=\"sideUserIcon\" was not injected: check your FXML file 'UserPage.fxml'.";
 		assert sideUsername != null : "fx:id=\"sideUsername\" was not injected: check your FXML file 'UserPage.fxml'.";
@@ -109,5 +113,7 @@ public class UserPageViewController {
 		user = UserDAO.getInstance().getUserEntity(ctrl.getId());
 		sideUsername.setText(user.getUsername());
 		fillActiveSessions();
+		userctrl.calendar(schedulepane);
+		
 	}
 }
