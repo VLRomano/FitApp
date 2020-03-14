@@ -8,8 +8,12 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.scene.control.Alert;
+import logic.CustomAlertBox;
 import logic.LoginBean;
 import logic.Query;
+import logic.exception.UserNotFoundException;
+import logic.factory.AlertFactory;
 
 public class DAO {
 
@@ -39,23 +43,25 @@ public class DAO {
 			pst.setString(2, password);
 			try (ResultSet rs = pst.executeQuery()) {
 				if (rs.next()) {
+					logger.log(Level.INFO, "user found");
 					bean.setId(rs.getInt(1));
-					if (bean.getId() > 0) {
-						logger.log(Level.INFO, "user found");
-						if (rs.getBoolean("manager")) {
-							bean.setType(true);
-						}
-						return true;
-					} else {
-						logger.log(Level.SEVERE, "Wrong Username or Password");
+					if (rs.getBoolean("manager")) {
+						bean.setType(true);
 					}
+					return true;
+				} else {
+					throw (UserNotFoundException) new UserNotFoundException(); 
 				}
+
 			}
 		} catch (SQLException connEx) {
-			logger.log(Level.SEVERE, connEx.getMessage(), connEx);
+			AlertFactory.getInstance().createAlert(connEx);
+		} catch (UserNotFoundException unf) {
+			AlertFactory.getInstance().createAlert(unf);
 		}
 		return false;
 	}
+
 
 	public void resetTable() {
 		try (Connection con = DriverManager.getConnection(URL, USR, PWD);

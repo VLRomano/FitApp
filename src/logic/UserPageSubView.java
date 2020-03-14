@@ -28,6 +28,7 @@ public class UserPageSubView implements AbstractSubView {
 	public Parent getRoot() {
 		return this.root;
 	}
+	
 	@Override
 	public void setRoot(Parent root) {
 		this.root = root;

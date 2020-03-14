@@ -69,7 +69,6 @@ public class UserPageViewController {
 
 	private MainController ctrl = MainController.getInstance();
 	private SubViewFactory factory = SubViewFactory.getInstance();
-	private UserPageController userctrl = new UserPageController();
 	private User user;
 
 	public void handleMouseEvent(MouseEvent event) {
@@ -112,8 +111,6 @@ public class UserPageViewController {
 
 		user = UserDAO.getInstance().getUserEntity(ctrl.getId());
 		sideUsername.setText(user.getUsername());
-		fillActiveSessions();
-		userctrl.calendar(schedulepane);
-		
+		fillActiveSessions();		
 	}
 }
