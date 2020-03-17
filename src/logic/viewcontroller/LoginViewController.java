@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import logic.LoginBean;
+import logic.bean.LoginBean;
 import logic.controller.LoginController;
 import logic.controller.MainController;
 import logic.factory.viewfactory.ViewFactory;

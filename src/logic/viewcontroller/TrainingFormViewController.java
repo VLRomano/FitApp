@@ -19,7 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
-import logic.TrainingFormBean;
+import logic.bean.TrainingFormBean;
 import logic.controller.OfferTrainingController;
 
 public class TrainingFormViewController implements Initializable{

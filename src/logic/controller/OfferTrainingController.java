@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import logic.TrainingFormBean;
+import logic.bean.TrainingFormBean;
 import logic.dao.GymDAO;
 import logic.entity.Gym;
 import logic.factory.viewfactory.ViewFactory;

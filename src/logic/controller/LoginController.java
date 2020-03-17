@@ -2,7 +2,7 @@ package logic.controller;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import logic.LoginBean;
+import logic.bean.LoginBean;
 import logic.dao.DAO;
 
 public class LoginController {

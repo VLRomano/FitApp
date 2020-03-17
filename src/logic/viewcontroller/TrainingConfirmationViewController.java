@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import logic.TrainingFormBean;
+import logic.bean.TrainingFormBean;
 import logic.controller.OfferTrainingController;
 
 public class TrainingConfirmationViewController implements Initializable {
