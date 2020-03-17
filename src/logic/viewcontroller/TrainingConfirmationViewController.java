@@ -7,10 +7,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import logic.TrainingFormBean;
@@ -65,8 +62,8 @@ public class TrainingConfirmationViewController implements Initializable {
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-    	OfferTrainingController OTController = OfferTrainingController.getInstance();
-    	TrainingFormBean bean = OTController.getTrainingBean();
+    	OfferTrainingController otCtrl = OfferTrainingController.getInstance();
+    	TrainingFormBean bean = otCtrl.getTrainingBean();
     	
     	if(bean.getSingle()) {
     		singleText.setText("singolo");
@@ -77,7 +74,8 @@ public class TrainingConfirmationViewController implements Initializable {
     	typeText.setText(bean.getTrainingType());
     	nameText.setText(bean.getTrainingName());
     	trainerText.setText(bean.getTrainerName());
-//    	startHourText.setText(Integer.toString(bean.getStartHour()));
+/*   added "" to fix smell
+    	"startHourText.setText(Integer.toString(bean.getStartHour()));" */
 		dateText.setText(bean.getDate().format(formatter));
 		descriptioText.setText(bean.getDescription());
     }
@@ -85,6 +83,6 @@ public class TrainingConfirmationViewController implements Initializable {
 
     @FXML
     void onMouseClickedEvent(MouseEvent event) {
-    	
+    	// to be implemented
     }
 }

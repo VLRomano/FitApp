@@ -19,12 +19,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import logic.controller.CardController;
 import logic.controller.MainController;
-import logic.controller.UserPageController;
 import logic.dao.SessionDAO;
 import logic.dao.UserDAO;
 import logic.entity.Session;
 import logic.entity.User;
-import logic.factory.SubViewFactory;
+import logic.factory.viewfactory.ViewFactory;
+import logic.factory.viewfactory.ViewType;
 
 public class UserPageViewController {
 	private final Logger logger = Logger.getLogger(getClass().getName());
@@ -68,13 +68,13 @@ public class UserPageViewController {
 	private Label sideGymStreet;
 
 	private MainController ctrl = MainController.getInstance();
-	private SubViewFactory factory = SubViewFactory.getInstance();
+	private ViewFactory factory = ViewFactory.getInstance();
 	private User user;
 
 	public void handleMouseEvent(MouseEvent event) {
 		if(event.getSource().equals(logOutIcon)) {
 			try {
-				ctrl.replace(MainController.getContainer(), factory.createSubView(0));
+				ctrl.replace(MainController.getContainer(), factory.createView(ViewType.LOGIN));
 			} catch (IOException e) {
 				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
 			}

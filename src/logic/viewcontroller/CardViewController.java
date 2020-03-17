@@ -47,7 +47,7 @@ public class CardViewController {
 
 
 	public void setDate(String date) {
-		this.date.setText(date);;
+		this.date.setText(date);
 	}
 
 

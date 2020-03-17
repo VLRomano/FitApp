@@ -1,15 +1,13 @@
 package logic.viewcontroller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -20,19 +18,14 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import logic.TrainingFormBean;
 import logic.controller.OfferTrainingController;
-import logic.factory.AbstractSubView;
-import logic.factory.SubViewFactory;
-import logic.controller.MainController;
 
 public class TrainingFormViewController implements Initializable{
 
-	OfferTrainingController OTController = OfferTrainingController.getInstance();
+	OfferTrainingController otCtrl = OfferTrainingController.getInstance();
 
-	private final Logger logger = Logger.getLogger(getClass().getName());
 
 	@FXML
 	private Label homeLabel;
@@ -79,14 +72,14 @@ public class TrainingFormViewController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		ObservableList<String> typeList = OTController.getTrainingList();
+		ObservableList<String> typeList = otCtrl.getTrainingList();
 		trainingTypeCBox.setItems(typeList);
 		trainingTypeCBox.setValue(typeList.get(0));
 
-		ObservableList<String> trainerList = OTController.getTrainerList();
+		ObservableList<String> trainerList = otCtrl.getTrainerList();
 		trainerCBox.setItems(trainerList);
-		trainerCBox.setValue(trainerList.get(0)); 	System.out.println("start initialization");
-
+		trainerCBox.setValue(trainerList.get(0)); 	
+		
 		startHourCBox.getItems().addAll(hourGenerator());
 		startHourCBox.setPromptText("HH");
 
@@ -123,8 +116,8 @@ public class TrainingFormViewController implements Initializable{
 			bean.setDate(datePicker.getValue());
 			bean.setDescription(descriptionTArea.getText());
 
-			OTController.setTrainingBean(bean);	
-			OTController.checkValidity();
+			otCtrl.setTrainingBean(bean);	
+			otCtrl.checkValidity();
 
 			//TODO: create check schedule for trainer in OfferTrainingController
 		}

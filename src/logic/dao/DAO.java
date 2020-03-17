@@ -8,12 +8,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.scene.control.Alert;
-import logic.CustomAlertBox;
 import logic.LoginBean;
 import logic.Query;
 import logic.exception.UserNotFoundException;
-import logic.factory.AlertFactory;
+import logic.factory.alertfactory.AlertFactory;
 
 public class DAO {
 
@@ -80,16 +78,4 @@ public class DAO {
 			logger.log(Level.SEVERE, fillEx.getMessage(), fillEx);
 		}
 	}
-
-	/*
-	 * public static void main(String[] args) { useless at the moment DAO d =
-	 * DAO.getInstance(); // d.resetTable(); // d.fillTable(); Gym g =
-	 * d.getGymEntity(1); System.out.println("id: "+g.getGymId());
-	 * System.out.println("gymName: "+g.getGymName());
-	 * System.out.println("managerid: "+g.getManagerId());
-	 * System.out.println("manager name: "+g.getManagerName());
-	 * System.out.println("street: "+g.getstreet());
-	 * System.out.println("course list: "+g.getCourses());
-	 * System.out.println("trainer list: "+g.getTrainers()); }
-	 */
 }

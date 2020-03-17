@@ -21,8 +21,9 @@ import javafx.scene.shape.Circle;
 import logic.LoginBean;
 import logic.controller.LoginController;
 import logic.controller.MainController;
-import logic.factory.AbstractSubView;
-import logic.factory.SubViewFactory;
+import logic.factory.viewfactory.ViewFactory;
+import logic.factory.viewfactory.ViewType;
+import logic.view.View;
 
 public class LoginViewController {
 	private final Logger logger = Logger.getLogger(getClass().getName());
@@ -83,14 +84,14 @@ public class LoginViewController {
 			LoginBean bean = new LoginBean(username, password);
 			if (ctrl.checkAuthentication(bean)) {
 				MainController.getInstance().setId(bean.getId());
-				SubViewFactory factory = SubViewFactory.getInstance();
-				AbstractSubView subview;
+				ViewFactory factory = ViewFactory.getInstance();
+				View view;
 				if(bean.getType()) {
-					subview = factory.createSubView(1);
+					view = factory.createView(ViewType.GYMPAGE);
 				} else {
-					subview = factory.createSubView(2);
+					view = factory.createView(ViewType.USERPAGE);
 				}
-				MainController.getInstance().replace(MainController.getContainer(), subview);
+				MainController.getInstance().replace(MainController.getContainer(), view);
 			}
 		}
 	}

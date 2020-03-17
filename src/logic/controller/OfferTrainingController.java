@@ -5,14 +5,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import logic.TrainingFormBean;
 import logic.dao.GymDAO;
 import logic.entity.Gym;
-import logic.factory.AbstractSubView;
-import logic.factory.SubViewFactory;
+import logic.factory.viewfactory.ViewFactory;
+import logic.factory.viewfactory.ViewType;
 
 public class OfferTrainingController {
 	
@@ -54,9 +53,8 @@ public class OfferTrainingController {
 		else {
 			logger.log(Level.INFO, "onto confirmation screen");
 			try {
-				SubViewFactory factory = SubViewFactory.getInstance();
-				AbstractSubView subview = factory.createSubView(5);
-				ctrl.replace(MainController.getContainer(), subview);
+				ViewFactory factory = ViewFactory.getInstance();
+				ctrl.replace(MainController.getContainer(), factory.createView(ViewType.OFFERTRAININGCONFIRMATION));
 			} catch (IOException e) {
 				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
 			}
@@ -64,8 +62,8 @@ public class OfferTrainingController {
 	}
 
 	public Gym getGymEntity(/*user name dynamically gotten*/) {
-		Gym gym = dao.getGymEntity(id); //this method is a dummy needs to be implemented
-		return gym;
+		return dao.getGymEntity(id); //this method is a dummy needs to be implemented
+		
 	}
 	
 	public TrainingFormBean getTrainingBean() {

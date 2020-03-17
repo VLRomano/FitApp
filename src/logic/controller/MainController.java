@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
-import logic.factory.AbstractSubView;
+import logic.view.View;
 
 public class MainController {
 	private static MainController instance;
@@ -37,13 +37,11 @@ public class MainController {
 		MainController.container = container;
 	}
 
-	public void replace(BorderPane container, AbstractSubView node) {
+	public void replace(BorderPane container, View node) {
 		container.setCenter(node.getRoot());
 		new FadeIn(container.getCenter()).play();
-		
 	}
 
-	//TODO create a a factory for all alerts
 	public void showDateAlert() {
 		Alert dateAlert = new Alert(AlertType.ERROR, "You cannot select a past date", ButtonType.OK);	    	
 		dateAlert.showAndWait();
