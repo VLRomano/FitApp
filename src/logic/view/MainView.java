@@ -2,8 +2,6 @@ package logic.view;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import animatefx.animation.FadeIn;
 import javafx.application.Application;
@@ -15,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import logic.controller.MainController;
+import logic.factory.alertfactory.AlertFactory;
 import logic.factory.viewfactory.ViewFactory;
 import logic.factory.viewfactory.ViewType;
 
@@ -28,13 +27,12 @@ public class MainView extends Application {
 	public void setRoot(Parent root) {
 		this.root = root;
 	}
-	private final Logger logger = Logger.getLogger(getClass().getName());
 	
 	public MainView() { // may be singleton
 		try {
 			load();
 		} catch (IOException e) {
-			logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
+			AlertFactory.getInstance().createAlert(e);
 		}
 	}
 	public void load() throws IOException {
@@ -64,10 +62,7 @@ public class MainView extends Application {
 			mainStage.show();
 			new FadeIn(root).play();
 		} catch (IllegalStateException e) {
-			logger.log(Level.SEVERE,"UNABLE TO START APPLICATION: error at "+getClass().getName()+"\n"
-					+ "Exception "+e+"\n"
-					+ "Caused by: "+e.getStackTrace()[0]);
-			System.exit(0);
+			AlertFactory.getInstance().createAlert(e);
 		}
 	}
 	public static List<Node> getAllNodes(Parent p){

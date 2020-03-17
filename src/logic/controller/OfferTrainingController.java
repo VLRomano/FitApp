@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import logic.bean.TrainingFormBean;
 import logic.dao.GymDAO;
 import logic.entity.Gym;
+import logic.factory.alertfactory.AlertFactory;
 import logic.factory.viewfactory.ViewFactory;
 import logic.factory.viewfactory.ViewType;
 
@@ -56,7 +57,7 @@ public class OfferTrainingController {
 				ViewFactory factory = ViewFactory.getInstance();
 				ctrl.replace(MainController.getContainer(), factory.createView(ViewType.OFFERTRAININGCONFIRMATION));
 			} catch (IOException e) {
-				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
+				AlertFactory.getInstance().createAlert(e);
 			}
 		}
 	}

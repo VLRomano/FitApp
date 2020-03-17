@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -23,11 +21,11 @@ import logic.dao.SessionDAO;
 import logic.dao.UserDAO;
 import logic.entity.Session;
 import logic.entity.User;
+import logic.factory.alertfactory.AlertFactory;
 import logic.factory.viewfactory.ViewFactory;
 import logic.factory.viewfactory.ViewType;
 
 public class UserPageViewController {
-	private final Logger logger = Logger.getLogger(getClass().getName());
 	@FXML
 	private ResourceBundle resources;
 
@@ -76,7 +74,7 @@ public class UserPageViewController {
 			try {
 				ctrl.replace(MainController.getContainer(), factory.createView(ViewType.LOGIN));
 			} catch (IOException e) {
-				logger.log(Level.SEVERE,"Unable to load controller: "+getClass().getName()+"\nException: "+e);
+				AlertFactory.getInstance().createAlert(e);
 			}
 		}
 	}

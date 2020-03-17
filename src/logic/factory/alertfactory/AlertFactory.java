@@ -4,7 +4,6 @@ package logic.factory.alertfactory;
 import java.io.IOException;
 
 import javafx.scene.control.Alert.AlertType;
-import logic.exception.ControllerLoadingException;
 import logic.exception.UserNotFoundException;
 
 public class AlertFactory {
